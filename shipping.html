@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping - KlikVa Fashion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica', sans-serif;
+        }
+
+        body {
+            background-color: #2C3E50;
+            color: #ECF0F1;
+            line-height: 1.6;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #2C3E50;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #F1C40F;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #F1C40F;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .nav-links a.active {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #F1C40F;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .order-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .order-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .order-header h1 {
+            font-size: 2.5rem;
+            color: #F1C40F;
+            margin-bottom: 15px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .order-header p {
+            color: #BDC3C7;
+            font-size: 1.1rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .order-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .order-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #34495E;
+            z-index: 0;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .step:nth-child(1) { animation-delay: 0.2s; }
+        .step:nth-child(2) { animation-delay: 0.4s; }
+        .step:nth-child(3) { animation-delay: 0.6s; }
+        .step:nth-child(4) { animation-delay: 0.8s; }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: #34495E;
+            border: 2px solid #F1C40F;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            color: #F1C40F;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .step.active .step-number {
+            background-color: #F1C40F;
+            color: #2C3E50;
+            transform: scale(1.1);
+        }
+
+        .step p {
+            color: #BDC3C7;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .step.active p {
+            color: #F1C40F;
+            font-weight: bold;
+        }
+
+        .order-form {
+            background-color: #34495E;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .order-form h2 {
+            color: #F1C40F;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.3s; }
+        .form-group:nth-child(2) { animation-delay: 0.4s; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #F1C40F;
+        }
+
+        .shipping-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .shipping-method {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #2C3E50;
+            border-radius: 5px;
+            background-color: #2C3E50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .shipping-method:hover {
+            border-color: #F1C40F;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .shipping-method.active {
+            border-color: #F1C40F;
+            background-color: rgba(241, 196, 15, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .shipping-method input {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+
+        .shipping-method-details {
+            flex: 1;
+        }
+
+        .shipping-method-name {
+            font-weight: bold;
+            color: #F1C40F;
+        }
+
+        .shipping-method-price {
+            color: #BDC3C7;
+        }
+
+        .shipping-method-eta {
+            font-size: 0.9rem;
+            color: #BDC3C7;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #2C3E50;
+            border-radius: 5px;
+            background-color: #2C3E50;
+            color: #ECF0F1;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group textarea:focus {
+            border-color: #F1C40F;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(241, 196, 15, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #F1C40F;
+            color: #F1C40F;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(241, 196, 15, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background-color: #F1C40F;
+            color: #2C3E50;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #f39c12;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary::after {
+            content: "";
+            display: inline-block;
+            height: 100%;
+            width: 100%;
+            border-radius: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition: all 0.4s;
+            background-color: #F1C40F;
+        }
+
+        .btn-primary:hover::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+
+        .order-summary {
+            margin-top: 40px;
+            background-color: #34495E;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: fadeInRight 0.8s ease-out;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .order-summary h2 {
+            color: #F1C40F;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #2C3E50;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .summary-item:nth-child(1) { animation-delay: 0.3s; }
+        .summary-item:nth-child(2) { animation-delay: 0.4s; }
+        .summary-item:nth-child(3) { animation-delay: 0.5s; }
+        .summary-item:nth-child(4) { animation-delay: 0.6s; }
+
+        .summary-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #F1C40F;
+        }
+
+        footer {
+            background-color: #161a1f;
+            color: #F1C40F;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #F1C40F;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            color: #F1C40F;
+            transform: translateY(-3px);
+        }
+
+        .hashtags {
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 9999;
+        }
+
+        .back-to-top:hover {
+            background-color: #2C3E50;
+            color: #F1C40F;
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links li {
+                margin: 5px 10px;
+            }
+
+            .order-steps {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 30px;
+            }
+
+            .order-steps::before {
+                display: none;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">KLIKVA</div>
+        <div class="nav-links-container">
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="item.html">ITEM</a></li>
+                <li><a href="order.html">ORDER</a></li>
+                <li><a href="outlet.html">OUTLET</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="order-container">
+        <div class="order-header">
+            <h1>PEMESANAN PRODUK</h1>
+            <p>Pilih metode pengiriman yang sesuai untuk pesanan Anda</p>
+        </div>
+
+        <div class="order-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <p>Informasi Pribadi</p>
+            </div>
+            <div class="step active">
+                <div class="step-number">2</div>
+                <p>Pengiriman</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <p>Pembayaran</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <p>Konfirmasi</p>
+            </div>
+        </div>
+
+        <form class="order-form" action="payment.html" method="GET">
+            <h2>Metode Pengiriman</h2>
+            
+            <div class="form-group">
+                <div class="shipping-methods">
+                    <label class="shipping-method active">
+                        <input type="radio" name="shipping" value="reguler" checked>
+                        <div class="shipping-method-details">
+                            <div class="shipping-method-name">Reguler</div>
+                            <div class="shipping-method-price">Rp 25.000</div>
+                            <div class="shipping-method-eta">Estimasi: 3-5 hari kerja</div>
+                        </div>
+                    </label>
+                    
+                    <label class="shipping-method">
+                        <input type="radio" name="shipping" value="express">
+                        <div class="shipping-method-details">
+                            <div class="shipping-method-name">Express</div>
+                            <div class="shipping-method-price">Rp 45.000</div>
+                            <div class="shipping-method-eta">Estimasi: 1-2 hari kerja</div>
+                        </div>
+                    </label>
+                    
+                    <label class="shipping-method">
+                        <input type="radio" name="shipping" value="same-day">
+                        <div class="shipping-method-details">
+                            <div class="shipping-method-name">Same Day</div>
+                            <div class="shipping-method-price">Rp 75.000</div>
+                            <div class="shipping-method-eta">Dikirim hari ini (jika dipesan sebelum jam 12.00)</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="shippingNotes">Catatan Pengiriman (Opsional)</label>
+                <textarea id="shippingNotes" name="shippingNotes" placeholder="Contoh: Tinggalkan paket di depan pintu jika tidak ada orang"></textarea>
+            </div>
+
+            <div class="button-group">
+                <a href="order.html" class="btn btn-outline">KEMBALI</a>
+                <button type="submit" class="btn btn-primary">LANJUT KE PEMBAYARAN</button>
+            </div>
+        </form>
+
+        <div class="order-summary">
+            <h2>Ringkasan Pesanan</h2>
+            
+            <div class="summary-item">
+                <span>FTH x EVOS ESPORTS (x1)</span>
+                <span>Rp 299.000</span>
+            </div>
+            <div class="summary-item">
+                <span>Faith Industries "24/H" NFL Jersey (x1)</span>
+                <span>Rp 299.000</span>
+            </div>
+            <div class="summary-item">
+                <span>Subtotal</span>
+                <span>Rp 598.000</span>
+            </div>
+            <div class="summary-item">
+                <span>Ongkos Kirim</span>
+                <span>Rp 25.000</span>
+            </div>
+            <div class="summary-item summary-total">
+                <span>Total</span>
+                <span>Rp 623.000</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">KLIKVA</div>
+        <p>Destinasi belanja online terbaik untuk fashion yang stylish, nyaman, dan terjangkau</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/auiu_56/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.tiktok.com/@brillianwicaksono0" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p>&copy; 2025 KLIKVA Fashion. All Rights Reserved.</p>
+        <div class="hashtags">#KLIKVAFASHION #STYLEWITHCONFIDENCE</div>
+    </footer>
+
+    <a href="#" id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Back to Top Button
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Load order data
+            const orderData = JSON.parse(localStorage.getItem('orderData'));
+            const customerInfo = JSON.parse(localStorage.getItem('customerInfo'));
+            
+            if (!orderData || !orderData.items || orderData.items.length === 0) {
+                alert('Tidak ada item dalam keranjang. Silakan kembali ke halaman produk.');
+                window.location.href = 'item.html';
+                return;
+            }
+
+            // Update order summary
+            const summaryContainer = document.querySelector('.order-summary');
+            summaryContainer.innerHTML = `
+                <h2>Ringkasan Pesanan</h2>
+                ${orderData.items.map(item => `
+                    <div class="summary-item">
+                        <span>${item.product} (x${item.quantity})</span>
+                        <span>Rp ${(item.price * item.quantity).toLocaleString('id-ID')}</span>
+                    </div>
+                `).join('')}
+                <div class="summary-item">
+                    <span>Subtotal</span>
+                    <span>Rp ${orderData.subtotal.toLocaleString('id-ID')}</span>
+                </div>
+                <div class="summary-item shipping-cost">
+                    <span>Ongkos Kirim</span>
+                    <span>Rp ${orderData.shipping.toLocaleString('id-ID')}</span>
+                </div>
+                <div class="summary-item summary-total">
+                    <span>Total</span>
+                    <span id="order-total">Rp ${orderData.total.toLocaleString('id-ID')}</span>
+                </div>
+            `;
+
+            // Shipping method selection
+            document.querySelectorAll('.shipping-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    document.querySelectorAll('.shipping-method').forEach(m => {
+                        m.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Update shipping cost
+                    const priceText = this.querySelector('.shipping-method-price').textContent;
+                    const newShippingCost = parseInt(priceText.replace(/\D/g, ''));
+                    const newTotal = orderData.subtotal + newShippingCost;
+                    
+                    // Update display
+                    document.querySelector('.shipping-cost span:last-child').textContent = priceText;
+                    document.getElementById('order-total').textContent = `Rp ${newTotal.toLocaleString('id-ID')}`;
+                    
+                    // Update order data
+                    orderData.shipping = newShippingCost;
+                    orderData.total = newTotal;
+                    localStorage.setItem('orderData', JSON.stringify(orderData));
+                });
+            });
+
+            // Form submission
+            const form = document.querySelector('.order-form');
+            form.addEventListener('submit', function(e) {
+                // Save selected shipping method
+                const selectedMethod = document.querySelector('.shipping-method.active input').value;
+                orderData.shippingMethod = selectedMethod;
+                localStorage.setItem('orderData', JSON.stringify(orderData));
+                
+                // Save shipping notes
+                const shippingNotes = document.getElementById('shippingNotes').value;
+                if (shippingNotes) {
+                    customerInfo.shippingNotes = shippingNotes;
+                    localStorage.setItem('customerInfo', JSON.stringify(customerInfo));
+                }
+            });
+
+            // Highlight active nav link
+            const currentPage = location.pathname.split('/').pop();
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if(link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Form submission
+        const form = document.querySelector('.order-form');
+        form.addEventListener('submit', function(e) {
+            // Save selected shipping method
+            const selectedMethod = document.querySelector('.shipping-method.active input').value;
+            orderData.shippingMethod = selectedMethod;
+            localStorage.setItem('orderData', JSON.stringify(orderData));
+            
+            // Save shipping notes
+            const shippingNotes = document.getElementById('shippingNotes').value;
+            if (shippingNotes) {
+                customerInfo.shippingNotes = shippingNotes;
+                localStorage.setItem('customerInfo', JSON.stringify(customerInfo));
+            }
+            
+            // Redirect ke payment.html
+            window.location.href = 'payment.html';
+        });
+        
+    </script>
+</body>
+</html>

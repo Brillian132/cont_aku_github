@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Pesanan - KlikVa Fashion</title>
+    <style>
+        /* Gaya Header yang sama dengan item.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Playfair Display', sans-serif;
+        }
+
+        body {
+            background-color: #2C3E50;
+            color: #ECF0F1;
+            padding-top: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #2C3E50;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #F1C40F;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #F1C40F;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .nav-links a.active {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .cart-icon {
+            position: relative;
+            color: #F1C40F;
+            font-size: 1.2rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* Gaya konten konfirmasi */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            background-color: #34495E;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #F1C40F;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #F1C40F;
+            margin: 25px 0 15px;
+            border-bottom: 2px solid #F1C40F;
+            padding-bottom: 10px;
+        }
+
+        .confirmation-message {
+            background-color: rgba(241, 196, 15, 0.1);
+            border-left: 4px solid #F1C40F;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 0 5px 5px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #3d566e;
+        }
+
+        th {
+            background-color: rgba(241, 196, 15, 0.1);
+            color: #F1C40F;
+        }
+
+        tr:hover {
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        .total-row {
+            font-weight: bold;
+            background-color: rgba(241, 196, 15, 0.1);
+        }
+
+        .total-row td {
+            color: #F1C40F;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #f39c12;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: #161a1f;
+            color: #F1C40F;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .nav-links li {
+                margin-left: 15px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <!-- Header yang sama dengan item.html -->
+    <nav class="navbar">
+        <div class="logo">KLIKVA</div>
+        <div class="nav-links-container">
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="item.html">ITEM</a></li>
+                <li><a href="order.html">ORDER</a></li>
+                <li><a href="outlet.html">OUTLET</a></li>
+                <li>
+                    <a href="order.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>KONFIRMASI PESANAN ANDA</h1>
+        
+        <div class="confirmation-message">
+            <p><i class="fas fa-check-circle"></i> Terima kasih! Pesanan Anda telah berhasil diterima.</p>
+            <p>Nomor pesanan: <strong id="order-number">KLIKVA-XXXXXX</strong></p>
+        </div>
+
+        <h2>Detail Pesanan</h2>
+        <table id="order-details">
+            <thead>
+                <tr>
+                    <th>Produk</th>
+                    <th>Harga</th>
+                    <th>Jumlah</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="order-items">
+                <!-- Diisi oleh JavaScript -->
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Subtotal</td>
+                    <td id="subtotal">Rp 0</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Ongkos Kirim</td>
+                    <td id="shipping">Rp 0</td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="3">Total Pembayaran</td>
+                    <td id="total">Rp 0</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <h2>Informasi Pengiriman</h2>
+        <table id="shipping-info">
+            <tbody>
+                <tr>
+                    <td width="30%">Nama Penerima</td>
+                    <td id="customer-name">-</td>
+                </tr>
+                <tr>
+                    <td>Alamat</td>
+                    <td id="customer-address">-</td>
+                </tr>
+                <tr>
+                    <td>No. Telepon</td>
+                    <td id="customer-phone">-</td>
+                </tr>
+                <tr>
+                    <td>Metode Pengiriman</td>
+                    <td id="shipping-method">-</td>
+                </tr>
+                <tr>
+                    <td>Catatan Pengiriman</td>
+                    <td id="shipping-notes">-</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Informasi Pembayaran</h2>
+        <table id="payment-info">
+            <tbody>
+                <tr>
+                    <td width="30%">Metode Pembayaran</td>
+                    <td id="payment-method">-</td>
+                </tr>
+                <tr>
+                    <td>Total Pembayaran</td>
+                    <td id="payment-amount">Rp 0</td>
+                </tr>
+                <tr>
+                    <td>Status Pembayaran</td>
+                    <td id="payment-status">Menunggu Pembayaran</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="btn">KEMBALI KE BERANDA</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">KLIKVA</div>
+        <p>Destinasi belanja online terbaik untuk fashion yang stylish, nyaman, dan terjangkau</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/auiu_56/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.tiktok.com/@brillianwicaksono0" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p>&copy; 2025 KLIKVA Fashion. All Rights Reserved.</p>
+        <div class="hashtags">#KLIKVAFASHION #STYLEWITHCONFIDENCE</div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update cart count
+            const updateCartCount = () => {
+                const orderData = JSON.parse(localStorage.getItem('orderData')) || {};
+                const count = orderData.items ? orderData.items.reduce((total, item) => total + item.quantity, 0) : 0;
+                document.getElementById('cart-count').textContent = count;
+            };
+
+            // Highlight active nav link
+            const currentPage = location.pathname.split('/').pop();
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if(link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Ambil data dari localStorage
+            const orderData = JSON.parse(localStorage.getItem('orderData')) || {};
+            const customerInfo = JSON.parse(localStorage.getItem('customerInfo')) || {};
+            const paymentData = JSON.parse(localStorage.getItem('paymentData')) || {};
+
+            // Generate nomor pesanan acak
+            document.getElementById('order-number').textContent = 'KLIKVA-' + Math.floor(100000 + Math.random() * 900000);
+
+            // Isi tabel detail pesanan
+            const orderItemsContainer = document.getElementById('order-items');
+            if (orderData.items) {
+                orderData.items.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.product}</td>
+                        <td>Rp ${item.price.toLocaleString('id-ID')}</td>
+                        <td>${item.quantity}</td>
+                        <td>Rp ${(item.price * item.quantity).toLocaleString('id-ID')}</td>
+                    `;
+                    orderItemsContainer.appendChild(row);
+                });
+
+                document.getElementById('subtotal').textContent = 'Rp ' + orderData.subtotal.toLocaleString('id-ID');
+                document.getElementById('shipping').textContent = 'Rp ' + orderData.shipping.toLocaleString('id-ID');
+                document.getElementById('total').textContent = 'Rp ' + orderData.total.toLocaleString('id-ID');
+            }
+
+            // Isi informasi pengiriman
+            if (customerInfo) {
+                document.getElementById('customer-name').textContent = customerInfo.name || '-';
+                document.getElementById('customer-address').textContent = 
+                    `${customerInfo.address || ''}, ${customerInfo.city || ''}, ${customerInfo.province || ''}, ${customerInfo.postalCode || ''}`;
+                document.getElementById('customer-phone').textContent = customerInfo.phone || '-';
+                document.getElementById('shipping-method').textContent = orderData.shippingMethod || '-';
+                document.getElementById('shipping-notes').textContent = customerInfo.shippingNotes || '-';
+            }
+
+            // Isi informasi pembayaran
+            if (paymentData) {
+                document.getElementById('payment-method').textContent = paymentData.method || '-';
+                document.getElementById('payment-amount').textContent = 'Rp ' + (paymentData.amount || 0).toLocaleString('id-ID');
+            }
+
+            // Update cart count
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order - KlikVa Fashion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica', sans-serif;
+        }
+
+        body {
+            background-color: #2C3E50;
+            color: #ECF0F1;
+            line-height: 1.6;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #2C3E50;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #F1C40F;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #F1C40F;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .nav-links a.active {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #F1C40F;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .order-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .order-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .order-header h1 {
+            font-size: 2.5rem;
+            color: #F1C40F;
+            margin-bottom: 15px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .order-header p {
+            color: #BDC3C7;
+            font-size: 1.1rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .order-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .order-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #34495E;
+            z-index: 0;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .step:nth-child(1) { animation-delay: 0.2s; }
+        .step:nth-child(2) { animation-delay: 0.4s; }
+        .step:nth-child(3) { animation-delay: 0.6s; }
+        .step:nth-child(4) { animation-delay: 0.8s; }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: #34495E;
+            border: 2px solid #F1C40F;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            color: #F1C40F;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .step.active .step-number {
+            background-color: #F1C40F;
+            color: #2C3E50;
+            transform: scale(1.1);
+        }
+
+        .step p {
+            color: #BDC3C7;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .step.active p {
+            color: #F1C40F;
+            font-weight: bold;
+        }
+
+        .order-content {
+            display: flex;
+            gap: 30px;
+        }
+
+        .order-form {
+            flex: 2;
+            background-color: #34495E;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .order-form h2 {
+            color: #F1C40F;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.3s; }
+        .form-group:nth-child(2) { animation-delay: 0.4s; }
+        .form-group:nth-child(3) { animation-delay: 0.5s; }
+        .form-group:nth-child(4) { animation-delay: 0.6s; }
+        .form-group:nth-child(5) { animation-delay: 0.7s; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #F1C40F;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #2C3E50;
+            border-radius: 5px;
+            background-color: #2C3E50;
+            color: #ECF0F1;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #F1C40F;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(241, 196, 15, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background-color: #f39c12;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+        .btn::after {
+            content: "";
+            display: inline-block;
+            height: 100%;
+            width: 100%;
+            border-radius: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition: all 0.4s;
+            background-color: #F1C40F;
+        }
+
+        .btn:hover::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+
+        .order-summary {
+            flex: 1;
+            background-color: #34495E;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            animation: fadeInRight 0.8s ease-out;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .order-summary h2 {
+            color: #F1C40F;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #2C3E50;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .summary-item:nth-child(1) { animation-delay: 0.3s; }
+        .summary-item:nth-child(2) { animation-delay: 0.4s; }
+        .summary-item:nth-child(3) { animation-delay: 0.5s; }
+        .summary-item:nth-child(4) { animation-delay: 0.6s; }
+
+        .summary-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #F1C40F;
+        }
+
+        /* NEW STYLES FOR EDITABLE CART */
+        .summary-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        
+        .summary-quantity {
+            width: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .summary-btn {
+            width: 25px;
+            height: 25px;
+            background-color: #2C3E50;
+            color: #F1C40F;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .summary-btn:hover {
+            background-color: #F1C40F;
+            color: #2C3E50;
+        }
+        
+        .remove-btn {
+            color: #e74c3c;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 16px;
+        }
+        
+        .remove-btn:hover {
+            color: #c0392b;
+        }
+        
+        .cart-item-details {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        footer {
+            background-color: #161a1f;
+            color: #F1C40F;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #F1C40F;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            color: #F1C40F;
+            transform: translateY(-3px);
+        }
+
+        .hashtags {
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 9999;
+        }
+
+        .back-to-top:hover {
+            background-color: #2C3E50;
+            color: #F1C40F;
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                margin-top: 15px;
+            }
+
+            .nav-links li {
+                margin: 0 10px;
+            }
+
+            .order-steps {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 30px;
+            }
+
+            .order-steps::before {
+                display: none;
+            }
+
+            .order-content {
+                flex-direction: column;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .summary-item-controls {
+                justify-content: flex-end;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">KLIKVA</div>
+        <div class="nav-links-container">
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="item.html">ITEM</a></li>
+                <li><a href="order.html" class="active">ORDER</a></li>
+                <li><a href="outlet.html">OUTLET</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="order-container">
+        <div class="order-header">
+            <h1>PEMESANAN PRODUK</h1>
+            <p>Isi formulir berikut untuk menyelesaikan pesanan Anda</p>
+        </div>
+
+        <div class="order-steps">
+            <div class="step active">
+                <div class="step-number">1</div>
+                <p>Informasi Pribadi</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <p>Pengiriman</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <p>Pembayaran</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <p>Konfirmasi</p>
+            </div>
+        </div>
+
+        <div class="order-content">
+            <form class="order-form" action="shipping.html" method="GET">
+                <h2>Informasi Pribadi</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Nama Depan</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Nama Belakang</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Nomor Telepon</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Alamat Lengkap</label>
+                    <textarea id="address" name="address" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">Kota</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postalCode">Kode Pos</label>
+                        <input type="text" id="postalCode" name="postalCode" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="province">Provinsi</label>
+                    <select id="province" name="province" required>
+                        <option value="">Pilih Provinsi</option>
+                        <option value="DKI Jakarta">DKI Jakarta</option>
+                        <option value="Jawa Barat">Jawa Barat</option>
+                        <option value="Jawa Tengah">Jawa Tengah</option>
+                        <option value="Jawa Timur">Jawa Timur</option>
+                        <option value="Banten">Banten</option>
+                        <option value="DI Yogyakarta">DI Yogyakarta</option>
+                        <option value="Bali">Bali</option>
+                        <option value="Sumatera Utara">Sumatera Utara</option>
+                        <option value="Sumatera Barat">Sumatera Barat</option>
+                        <option value="Riau">Riau</option>
+                        <option value="Kalimantan Barat">Kalimantan Barat</option>
+                        <option value="Kalimantan Timur">Kalimantan Timur</option>
+                        <option value="Sulawesi Selatan">Sulawesi Selatan</option>
+                        <option value="Papua">Papua</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Catatan (Opsional)</label>
+                    <textarea id="notes" name="notes"></textarea>
+                </div>
+
+                <button type="submit" class="btn">LANJUT KE PENGIRIMAN</button>
+            </form>
+
+            <div class="order-summary">
+                <h2>Ringkasan Pesanan</h2>
+                <div id="cart-items-container">
+                    <!-- Cart items will be dynamically inserted here -->
+                </div>
+                <div class="summary-item">
+                    <span>Ongkos Kirim</span>
+                    <span>Rp 25.000</span>
+                </div>
+                <div class="summary-item summary-total">
+                    <span>Total</span>
+                    <span id="total-price">Rp 0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">KLIKVA</div>
+        <p>Destinasi belanja online terbaik untuk fashion yang stylish, nyaman, dan terjangkau</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/auiu_56/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.tiktok.com/@brillianwicaksono0" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p>&copy; 2025 KLIKVA Fashion. All Rights Reserved.</p>
+        <div class="hashtags">#KLIKVAFASHION #STYLEWITHCONFIDENCE</div>
+    </footer>
+
+    <a href="#" id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Back to Top Button
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Cart functionality
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const cartContainer = document.getElementById('cart-items-container');
+            const totalPriceElement = document.getElementById('total-price');
+            
+            // Calculate subtotal
+            function calculateSubtotal() {
+                return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+            }
+            
+            // Update cart display
+            function updateCartDisplay() {
+                cartContainer.innerHTML = '';
+                cartItems = cartItems.filter(item => item && item.product && !isNaN(item.price) && item.quantity > 0);
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                
+                const subtotal = calculateSubtotal();
+                const shippingCost = 25000;
+                const total = subtotal + shippingCost;
+                
+                // Save order data for shipping page
+                const orderData = {
+                    items: cartItems,
+                    subtotal: subtotal,
+                    shipping: shippingCost,
+                    total: total
+                };
+                localStorage.setItem('orderData', JSON.stringify(orderData));
+                
+                if (cartItems.length === 0) {
+                    cartContainer.innerHTML = '<div class="summary-item"><span>Keranjang kosong</span></div>';
+                } else {
+                    cartItems.forEach((item, index) => {
+                        const itemElement = document.createElement('div');
+                        itemElement.className = 'summary-item';
+                        itemElement.innerHTML = `
+                            <div class="cart-item-details">
+                                <span>${item.product}</span>
+                                <span>Rp ${(item.price * item.quantity).toLocaleString('id-ID')}</span>
+                            </div>
+                            <div class="summary-item-controls">
+                                <button class="summary-btn minus-btn" data-index="${index}">-</button>
+                                <span class="summary-quantity">${item.quantity}</span>
+                                <button class="summary-btn plus-btn" data-index="${index}">+</button>
+                                <button class="remove-btn" data-index="${index}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        `;
+                        cartContainer.appendChild(itemElement);
+                    });
+                    
+                    const subtotalElement = document.createElement('div');
+                    subtotalElement.className = 'summary-item';
+                    subtotalElement.innerHTML = `
+                        <span>Subtotal</span>
+                        <span>Rp ${subtotal.toLocaleString('id-ID')}</span>
+                    `;
+                    cartContainer.appendChild(subtotalElement);
+                }
+                
+                // Update shipping and total
+                const shippingElement = document.createElement('div');
+                shippingElement.className = 'summary-item';
+                shippingElement.innerHTML = `
+                    <span>Ongkos Kirim</span>
+                    <span>Rp ${shippingCost.toLocaleString('id-ID')}</span>
+                `;
+                cartContainer.appendChild(shippingElement);
+                
+                totalPriceElement.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+                
+                // Add event listeners
+                addCartItemEventListeners();
+            }
+            
+            // Add event listeners to cart controls
+            function addCartItemEventListeners() {
+                document.querySelectorAll('.plus-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        cartItems[index].quantity += 1;
+                        updateCartDisplay();
+                    });
+                });
+                
+                document.querySelectorAll('.minus-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        if (cartItems[index].quantity > 1) {
+                            cartItems[index].quantity -= 1;
+                        } else {
+                            cartItems.splice(index, 1);
+                        }
+                        updateCartDisplay();
+                    });
+                });
+                
+                document.querySelectorAll('.remove-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        cartItems.splice(index, 1);
+                        updateCartDisplay();
+                    });
+                });
+            }
+            
+            // Initial cart display
+            updateCartDisplay();
+
+            // Form validation
+            const form = document.querySelector('.order-form');
+            if(form) {
+                form.addEventListener('submit', function(e) {
+                    const requiredFields = form.querySelectorAll('[required]');
+                    let isValid = true;
+                    
+                    requiredFields.forEach(field => {
+                        if(!field.value.trim()) {
+                            field.style.borderColor = '#e74c3c';
+                            isValid = false;
+                        } else {
+                            field.style.borderColor = '#2C3E50';
+                        }
+                    });
+
+                    if(!isValid) {
+                        e.preventDefault();
+                        alert('Harap isi semua field yang wajib diisi!');
+                        return;
+                    }
+                    
+                    if (cartItems.length === 0) {
+                        e.preventDefault();
+                        alert('Keranjang belanja Anda kosong. Silakan tambahkan produk terlebih dahulu.');
+                        return;
+                    }
+                    
+                    // Save customer info
+                    const customerInfo = {
+                        firstName: document.getElementById('firstName').value,
+                        lastName: document.getElementById('lastName').value,
+                        email: document.getElementById('email').value,
+                        phone: document.getElementById('phone').value,
+                        address: document.getElementById('address').value,
+                        city: document.getElementById('city').value,
+                        postalCode: document.getElementById('postalCode').value,
+                        province: document.getElementById('province').value,
+                        notes: document.getElementById('notes').value
+                    };
+                    localStorage.setItem('customerInfo', JSON.stringify(customerInfo));
+                });
+            }
+        });
+    </script>
+</body>
+</html>

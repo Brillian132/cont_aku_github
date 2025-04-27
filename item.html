@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KlikVa Fashion - Our Items</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica', sans-serif;
+        }
+
+        body {
+            background-color: #2C3E50;
+            color: #403818;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #2C3E50;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #F1C40F;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #F1C40F;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.pinimg.com/736x/01/ef/d3/01efd316e947286f97ea8652698be2bb.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #F1C40F;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            background-color: white;
+            color: #1b2734;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .shop-btn:hover {
+            background-color: #F1C40F;
+            transform: translateY(-3px);
+        }
+
+        .products {
+            padding: 60px 50px;
+            text-align: center;
+            background-color: #2C3E50;
+        }
+
+        .products h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #F1C40F;
+            position: relative;
+            display: inline-block;
+        }
+
+        .products h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: #F1C40F;
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background-color: #F1C40F;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .product-img {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .product-info {
+            padding: 20px;
+            color: #2C3E50;
+            position: relative;
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            min-height: 60px;
+        }
+
+        .product-info p {
+            margin-bottom: 15px;
+            color: #34495E;
+            font-size: 0.9rem;
+        }
+
+        .price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #2C3E50;
+            display: block;
+            margin: 15px 0;
+        }
+
+        /* Quantity controls */
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            justify-content: center;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background-color: #2C3E50;
+            color: #F1C40F;
+            border: none;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            margin: 0 10px;
+            padding: 5px;
+            border: 1px solid #2C3E50;
+            border-radius: 5px;
+        }
+
+        .add-to-cart {
+            display: inline-block;
+            background-color: #2C3E50;
+            color: #F1C40F;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #2C3E50;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .add-to-cart:hover {
+            background-color: #F1C40F;
+            color: #2C3E50;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .add-to-cart i {
+            margin-right: 8px;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: #F1C40F;
+            padding: 30px;
+            border-radius: 10px;
+            width: 350px;
+            max-width: 90%;
+            text-align: center;
+            position: relative;
+            color: #2C3E50;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .modal-actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        #undoAdd {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        #viewCart {
+            background-color: #2C3E50;
+            color: #F1C40F;
+        }
+        
+        #undoAdd:hover {
+            background-color: #c0392b;
+        }
+        
+        #viewCart:hover {
+            background-color: #1a252f;
+        }
+
+        footer {
+            background-color: #161a1f;
+            color: #F1C40F;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #F1C40F;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #F1C40F;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 9999;
+        }
+
+        .back-to-top:hover {
+            background-color: #2C3E50;
+            color: #F1C40F;
+            transform: translateY(-5px);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                margin-top: 15px;
+            }
+
+            .nav-links li {
+                margin: 0 10px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .products {
+                padding: 40px 20px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <p id="modalMessage">Produk telah ditambahkan ke keranjang!</p>
+            <div class="modal-actions">
+                <button id="undoAdd">Batalkan</button>
+                <button id="viewCart">Lihat Keranjang</button>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="navbar">
+        <div class="logo">KLIKVA</div>
+        <div class="nav-links-container">
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="item.html" class="active">ITEM</a></li>
+                <li><a href="order.html">ORDER</a></li>
+                <li><a href="outlet.html">OUTLET</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>PRODUK TERBAIK KLIKVA</h1>
+            <p>Temukan koleksi fashion terbaru kami yang dirancang untuk kenyamanan dan gaya Anda</p>
+            <a href="#products" class="shop-btn">LIHAT PRODUK</a>
+        </div>
+    </section>
+    
+    <section class="products" id="products">
+        <h2>BEST SELLER</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/8/15/4fc1e823-05a8-483e-90c4-0c610e7153ac.jpg.webp?ect=4g');"></div>
+                <div class="product-info">
+                    <h3>FTH x EVOS ESPORTS</h3>
+                    <p>Ryuko</p>
+                    <span class="price">Rp 299.000</span>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <input type="number" class="quantity-input" value="0" min="1">
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <button class="add-to-cart" data-product="FTH x EVOS ESPORTS" data-price="299000">
+                        <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('https://images.tokopedia.net/img/cache/500-square/VqbcmM/2023/7/18/65476342-53ed-4271-ae54-5dc4bdd04f24.jpg.webp?ect=4g');"></div>
+                <div class="product-info">
+                    <h3>FTH x EVOS Pro Kit 2023</h3>
+                    <p>Fearless True Hero</p>
+                    <span class="price">Rp 799.000</span>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <input type="number" class="quantity-input" value="0" min="1">
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <button class="add-to-cart" data-product="FTH x EVOS Pro Kit 2023" data-price="799000">
+                        <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/6/14/ecb52a5f-0da9-43f1-9d2f-75e502b63498.jpg.webp?ect=4g');"></div>
+                <div class="product-info">
+                    <h3>Faith Industries Racing Series</h3>
+                    <p>Full Throttle Heroes Leather Jacket</p>
+                    <span class="price">Rp 1.299.000</span>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <input type="number" class="quantity-input" value="0" min="1">
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <button class="add-to-cart" data-product="Faith Industries Racing Series" data-price="1299000">
+                        <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products">
+        <h2>PRODUK KAMI</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('https://images.tokopedia.net/img/cache/900/VqbcmM/2025/3/19/dac4a0a4-4169-4384-93dc-03b8fd494b5d.jpg');"></div>
+                <div class="product-info">
+                    <h3>FTH Umbrella</h3>
+                    <p>Payung premium dengan desain eksklusif</p>
+                    <span class="price">Rp 199.000</span>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <input type="number" class="quantity-input" value="0" min="1">
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <button class="add-to-cart" data-product="FTH Umbrella" data-price="199000">
+                        <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('https://images.tokopedia.net/img/cache/500-square/VqbcmM/2025/1/17/8c28225a-cf8c-4fe3-b087-06192f3aaefb.jpg.webp?ect=4g');"></div>
+                <div class="product-info">
+                    <h3>Faith Industries "24/H" NFL Jersey</h3>
+                    <p>Jersey dengan desain khusus</p>
+                    <span class="price">Rp 299.000</span>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <input type="number" class="quantity-input" value="0" min="1">
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <button class="add-to-cart" data-product="Faith Industries 24/H NFL Jersey" data-price="299000">
+                        <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('https://images.tokopedia.net/img/cache/900/VqbcmM/2025/1/23/fdf31f30-0aa4-4c73-a963-da6a37fd9a0b.jpg');"></div>
+                <div class="product-info">
+                    <h3>Faith Industries Harrington Jacket</h3>
+                    <p>The Awakening Metaphor</p>
+                    <span class="price">Rp 1.300.000</span>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <input type="number" class="quantity-input" value="0" min="1">
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <button class="add-to-cart" data-product="Faith Industries Harrington Jacket" data-price="1300000">
+                        <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('https://images.tokopedia.net/img/cache/900/VqbcmM/2025/1/17/674991ce-83cd-421f-ac3e-4c3537d8d881.png');"></div>
+                <div class="product-info">
+                    <h3>Faith Industries "Graffity Hopper"</h3>
+                    <p>Pullover Hoodie Navy</p>
+                    <span class="price">Rp 399.000</span>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <input type="number" class="quantity-input" value="0" min="1">
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <button class="add-to-cart" data-product="Faith Industries Graffity Hopper" data-price="399000">
+                        <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('https://images.tokopedia.net/img/cache/900/VqbcmM/2025/3/21/40a219b4-e810-4a76-839e-66ddb8e43ba9.jpg');"></div>
+                <div class="product-info">
+                    <h3>Faith Industries "Cappie Mita"</h3>
+                    <p>Dark Navy Tshirt</p>
+                    <span class="price">Rp 1.500.000</span>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn minus">-</button>
+                        <input type="number" class="quantity-input" value="0" min="1">
+                        <button class="quantity-btn plus">+</button>
+                    </div>
+                    <button class="add-to-cart" data-product="Faith Industries Cappie Mita" data-price="1500000">
+                        <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">KLIKVA</div>
+        <p>Destinasi belanja online terbaik untuk fashion yang stylish, nyaman, dan terjangkau</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p>&copy; 2025 KLIKVA Fashion. All Rights Reserved.</p>
+    </footer>
+
+    <a href="#" id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Back to Top Button
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Highlight active nav link
+            const currentPage = window.location.pathname.split('/').pop();
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Cart functionality
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+            // Cart modal elements
+            const cartModal = document.getElementById('cartModal');
+            const modalMessage = document.getElementById('modalMessage');
+            const undoAddBtn = document.getElementById('undoAdd');
+            const viewCartBtn = document.getElementById('viewCart');
+            const closeModal = document.querySelector('.close-modal');
+            
+            // Track the last added item for undo functionality
+            let lastAddedItem = null;
+            
+            // Quantity controls
+            document.querySelectorAll('.quantity-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const input = this.parentElement.querySelector('.quantity-input');
+                    let value = parseInt(input.value);
+                    
+                    if (this.classList.contains('minus') && value > 1) {
+                        input.value = value - 1;
+                    } else if (this.classList.contains('plus')) {
+                        input.value = value + 1;
+                    }
+                });
+            });
+
+            // Add to cart buttons with quantity
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const product = this.getAttribute('data-product');
+                    const price = parseInt(this.getAttribute('data-price'));
+                    const quantity = parseInt(this.parentElement.querySelector('.quantity-input').value);
+                    
+                    // Add item to cart
+                    addToCart(product, price, quantity);
+                    
+                    // Store last added item for undo
+                    lastAddedItem = { product, price, quantity };
+                    
+                    // Show modal
+                    modalMessage.textContent = `${quantity}x ${product} telah ditambahkan ke keranjang!`;
+                    cartModal.style.display = 'flex';
+                });
+            });
+            
+            // Undo add to cart
+            undoAddBtn.addEventListener('click', function() {
+                if (lastAddedItem) {
+                    removeFromCart(lastAddedItem.product, lastAddedItem.quantity);
+                    cartModal.style.display = 'none';
+                }
+            });
+            
+            // View cart
+            viewCartBtn.addEventListener('click', function() {
+                window.location.href = 'order.html';
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                cartModal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === cartModal) {
+                    cartModal.style.display = 'none';
+                }
+            });
+            
+            function addToCart(product, price, quantity = 1) {
+                // Check if product already in cart
+                const existingItem = cartItems.find(item => item.product === product);
+                
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    cartItems.push({
+                        product: product,
+                        price: price,
+                        quantity: quantity
+                    });
+                }
+                
+                // Save to localStorage
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            }
+            
+            function removeFromCart(product, quantity) {
+                const itemIndex = cartItems.findIndex(item => item.product === product);
+                
+                if (itemIndex !== -1) {
+                    if (cartItems[itemIndex].quantity > quantity) {
+                        cartItems[itemIndex].quantity -= quantity;
+                    } else {
+                        cartItems.splice(itemIndex, 1);
+                    }
+                    
+                    // Save to localStorage
+                    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                }
+            }
+        });
+    </script>
+</body>
+</html>

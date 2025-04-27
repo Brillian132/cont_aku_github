@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outlet - KlikVa Fashion</title>
+    <style>
+        /* Gaya Header yang sama dengan item.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Playfair Display', sans-serif;
+        }
+
+        body {
+            background-color: #2C3E50;
+            color: #ECF0F1;
+            padding-top: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #2C3E50;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #F1C40F;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #F1C40F;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .nav-links a.active {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .cart-icon {
+            position: relative;
+            color: #F1C40F;
+            font-size: 1.2rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* Gaya konten outlet */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .outlet-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .outlet-header h1 {
+            font-size: 2.5rem;
+            color: #F1C40F;
+            margin-bottom: 15px;
+        }
+
+        .outlet-header p {
+            color: #BDC3C7;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .outlet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .outlet-card {
+            background-color: #34495E;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .outlet-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .outlet-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .outlet-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .outlet-card:hover .outlet-image img {
+            transform: scale(1.05);
+        }
+
+        .outlet-info {
+            padding: 20px;
+        }
+
+        .outlet-info h3 {
+            color: #F1C40F;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .outlet-address {
+            color: #BDC3C7;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .outlet-contact {
+            margin-bottom: 15px;
+        }
+
+        .outlet-contact p {
+            color: #BDC3C7;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .outlet-contact i {
+            margin-right: 10px;
+            color: #F1C40F;
+        }
+
+        .outlet-hours {
+            background-color: rgba(241, 196, 15, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .outlet-hours h4 {
+            color: #F1C40F;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .outlet-hours i {
+            margin-right: 10px;
+        }
+
+        .outlet-hours ul {
+            list-style: none;
+        }
+
+        .outlet-hours li {
+            color: #BDC3C7;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .outlet-hours span {
+            color: #F1C40F;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            background-color: #f39c12;
+        }
+
+        footer {
+            background-color: #161a1f;
+            color: #F1C40F;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .nav-links li {
+                margin-left: 15px;
+            }
+            
+            .outlet-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <!-- Header yang sama dengan item.html -->
+    <nav class="navbar">
+        <div class="logo">KLIKVA</div>
+        <div class="nav-links-container">
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="item.html">ITEM</a></li>
+                <li><a href="order.html">ORDER</a></li>
+                <li><a href="outlet.html" class="active">OUTLET</a></li>
+                <li>
+                    <a href="order.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="outlet-header">
+            <h1>TEMUKAN OUTLET KAMI</h1>
+            <p>Kunjungi outlet terdekat dan dapatkan pengalaman belanja langsung dengan koleksi terbaru dan penawaran eksklusif hanya di toko kami</p>
+        </div>
+
+        <div class="outlet-grid">
+            <!-- Outlet 1 -->
+            <div class="outlet-card">
+                <div class="outlet-image">
+                    <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Outlet Jakarta">
+                </div>
+                <div class="outlet-info">
+                    <h3>KLIKVA Jakarta</h3>
+                    <p class="outlet-address">Jl. Sudirman No. 123, Gedung Plaza Senayan Lt. 3, Jakarta Selatan, DKI Jakarta 12190</p>
+                    
+                    <div class="outlet-contact">
+                        <p><i class="fas fa-phone-alt"></i> (021) 12345678</p>
+                        <p><i class="fas fa-envelope"></i> jakarta@klikva.com</p>
+                    </div>
+                    
+                    <div class="outlet-hours">
+                        <h4><i class="far fa-clock"></i> Jam Operasional</h4>
+                        <ul>
+                            <li>Senin-Jumat <span>10:00 - 21:00</span></li>
+                            <li>Sabtu-Minggu <span>09:00 - 22:00</span></li>
+                        </ul>
+                    </div>
+                    
+                    <a href="https://maps.google.com" target="_blank" class="btn">
+                        <i class="fas fa-map-marker-alt"></i> Petunjuk Arah
+                    </a>
+                </div>
+            </div>
+
+            <!-- Outlet 2 -->
+            <div class="outlet-card">
+                <div class="outlet-image">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Outlet Bandung">
+                </div>
+                <div class="outlet-info">
+                    <h3>KLIKVA Bandung</h3>
+                    <p class="outlet-address">Jl. Riau No. 45, Gedung Paris Van Java Mall Lt. 2, Bandung, Jawa Barat 40115</p>
+                    
+                    <div class="outlet-contact">
+                        <p><i class="fas fa-phone-alt"></i> (022) 87654321</p>
+                        <p><i class="fas fa-envelope"></i> bandung@klikva.com</p>
+                    </div>
+                    
+                    <div class="outlet-hours">
+                        <h4><i class="far fa-clock"></i> Jam Operasional</h4>
+                        <ul>
+                            <li>Senin-Jumat <span>10:00 - 21:00</span></li>
+                            <li>Sabtu-Minggu <span>09:00 - 22:00</span></li>
+                        </ul>
+                    </div>
+                    
+                    <a href="https://maps.google.com" target="_blank" class="btn">
+                        <i class="fas fa-map-marker-alt"></i> Petunjuk Arah
+                    </a>
+                </div>
+            </div>
+
+            <!-- Outlet 3 -->
+            <div class="outlet-card">
+                <div class="outlet-image">
+                    <img src="https://images.unsplash.com/photo-1500380804539-4e1e8c1e7118?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Outlet Surabaya">
+                </div>
+                <div class="outlet-info">
+                    <h3>KLIKVA Surabaya</h3>
+                    <p class="outlet-address">Jl. Tunjungan No. 78, Gedung Tunjungan Plaza Lt. 4, Surabaya, Jawa Timur 60271</p>
+                    
+                    <div class="outlet-contact">
+                        <p><i class="fas fa-phone-alt"></i> (031) 23456789</p>
+                        <p><i class="fas fa-envelope"></i> surabaya@klikva.com</p>
+                    </div>
+                    
+                    <div class="outlet-hours">
+                        <h4><i class="far fa-clock"></i> Jam Operasional</h4>
+                        <ul>
+                            <li>Senin-Jumat <span>10:00 - 21:00</span></li>
+                            <li>Sabtu-Minggu <span>09:00 - 22:00</span></li>
+                        </ul>
+                    </div>
+                    
+                    <a href="https://maps.google.com" target="_blank" class="btn">
+                        <i class="fas fa-map-marker-alt"></i> Petunjuk Arah
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">KLIKVA</div>
+        <p>Destinasi belanja online terbaik untuk fashion yang stylish, nyaman, dan terjangkau</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/auiu_56/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.tiktok.com/@brillianwicaksono0" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p>&copy; 2025 KLIKVA Fashion. All Rights Reserved.</p>
+        <div class="hashtags">#KLIKVAFASHION #STYLEWITHCONFIDENCE</div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update cart count
+            const updateCartCount = () => {
+                const orderData = JSON.parse(localStorage.getItem('orderData')) || {};
+                const count = orderData.items ? orderData.items.reduce((total, item) => total + item.quantity, 0) : 0;
+                document.getElementById('cart-count').textContent = count;
+            };
+
+            // Highlight active nav link
+            const currentPage = location.pathname.split('/').pop();
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if(link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Update cart count
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
