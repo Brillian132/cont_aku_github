@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perasaanku untukmu</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .background-stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-star {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+            opacity: 0.5;
+        }
+
+        .bg-star:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+        .bg-star:nth-child(2) { top: 20%; left: 85%; animation-delay: 0.5s; }
+        .bg-star:nth-child(3) { top: 30%; left: 30%; animation-delay: 1s; }
+        .bg-star:nth-child(4) { top: 40%; left: 70%; animation-delay: 1.5s; }
+        .bg-star:nth-child(5) { top: 50%; left: 20%; animation-delay: 2s; }
+        .bg-star:nth-child(6) { top: 60%; left: 90%; animation-delay: 2.5s; }
+        .bg-star:nth-child(7) { top: 70%; left: 40%; animation-delay: 3s; }
+        .bg-star:nth-child(8) { top: 80%; left: 60%; animation-delay: 3.5s; }
+        .bg-star:nth-child(9) { top: 90%; left: 25%; animation-delay: 4s; }
+        .bg-star:nth-child(10) { top: 15%; left: 50%; animation-delay: 4.5s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.2s ease-out;
+            border: 1px solid #ff4d88;
+            z-index: 10;
+            margin: 20px 0;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .result-container {
+            display: none;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #4ecdc4;
+            z-index: 10;
+            margin: 20px 0;
+            position: relative;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: #ff4d88;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 77, 136, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        h1:hover {
+            transform: scale(1.05);
+        }
+
+        p {
+            font-size: 1em;
+            line-height: 1.8;
+            color: #e0e0e0;
+            margin: 20px 0;
+            animation: textFadeIn 1s ease forwards;
+            animation-delay: calc(0.2s * var(--i));
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes textFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .highlight {
+            color: #ff4d88;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .highlight:hover {
+            color: #4ecdc4;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .btn:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        .yes-btn {
+            background: #4ecdc4;
+        }
+
+        .no-btn {
+            background: #ff4d88;
+        }
+
+        .yes-btn:hover {
+            background: #2ea8a1;
+            box-shadow: 0 0 15px #4ecdc4;
+        }
+
+        .no-btn:hover {
+            background: #e03d73;
+            box-shadow: 0 0 15px #ff4d88;
+        }
+
+        .heart-container {
+            position: relative;
+            height: 100px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .heart {
+            position: absolute;
+            height: 30px;
+            width: 30px;
+            opacity: 0;
+            background: #ff4d88;
+            transform: rotate(45deg);
+            animation: heartAnimation 2s ease-in infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            height: 30px;
+            width: 30px;
+            background: #ff4d88;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -15px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: -15px;
+        }
+
+        @keyframes heartAnimation {
+            0% {
+                transform: translateY(0) rotate(45deg) scale(0.3);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(45deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+        }
+
+        .playback-controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .audio-btn {
+            padding: 8px 16px;
+            font-size: 0.9em;
+            color: #ffffff;
+            background: #4ecdc4;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .audio-btn:hover {
+            background: #ff4d88;
+            box-shadow: 0 0 10px #ff4d88;
+        }
+
+        #no-btn {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            .container, .result-container {
+                padding: 20px;
+                width: 85%;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            p {
+                font-size: 0.9em;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .btn-container {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Stars -->
+    <div class="background-stars">
+        <div class="bg-star"></div>
+        <div class="bg-star"></div>
+        <div class="bg-star"></div>
+        <div class="bg-star"></div>
+        <div class="bg-star"></div>
+        <div class="bg-star"></div>
+        <div class="bg-star"></div>
+        <div class="bg-star"></div>
+        <div class="bg-star"></div>
+        <div class="bg-star"></div>
+    </div>
+
+    <!-- Main Question Container -->
+    <div class="container" id="question-container">
+        <h1>Hai Kamu...</h1>
+        <div class="heart-container">
+            <div class="heart" style="left: 20%; animation-delay: 0s;"></div>
+            <div class="heart" style="left: 50%; animation-delay: 1s;"></div>
+            <div class="heart" style="left: 80%; animation-delay: 0.5s;"></div>
+        </div>
+        <p style="--i: 1">Kadang aku mikir, kenapa ya dari sekian banyak hal yang bisa bikin hari aku seru, ujung-ujungnya pikiran aku balik ke kamu lagi.</p>
+        <p style="--i: 2">Aku bukan orang yang gampang cerita soal perasaan. Tapi akhir-akhir ini, aku mulai suka rutinitas kecil yang ada <span class="highlight">kamu di dalamnya.</span>.</p>
+        <p style="--i: 3">Entah itu cuma ngobrol sebentar, atau sekadar lihat story kamu lewat. Gimana ya... </p>
+        <p style="--i: 4" class="highlight">Mau nggak, jadi tempat aku pulang setelah hari-hari ribet dunia?</p>
+        
+        <div class="btn-container">
+            <button class="btn yes-btn" id="yes-btn">Iya, Mau!</button>
+            <button class="btn no-btn" id="no-btn">Tidak</button>
+        </div>
+        
+        <div class="playback-controls">
+            <button class="audio-btn" id="play-btn">Putar Musik</button>
+            <button class="audio-btn" id="pause-btn">Jeda Musik</button>
+        </div>
+    </div>
+
+    <!-- Result Container (Initially Hidden) -->
+    <div class="result-container" id="result-container">
+        <h1>Perasaanku Diterima! ❤️</h1>
+        <div class="heart-container" id="celebration-hearts">
+            <!-- Hearts will be added here by JavaScript -->
+        </div>
+        <p style="--i: 1">Terima kasih sudah menerima perasaanku! Aku janji akan berusaha menjadi yang terbaik untukmu.</p>
+        <p style="--i: 2">Mulai hari ini, kita akan menulis cerita indah bersama-sama.</p>
+        <p style="--i: 3">Aku akan ada di sisimu, mendukungmu, mendengarkanmu, dan menyayangimu dengan sepenuh hatiku.</p>
+        <p style="--i: 4" class="highlight">Terima kasih sudah menjadi bagian penting dalam hidupku. Aku sayang kamu! ❤️</p>
+        <p style="--i: 5" class="highlight">JANGAN LUPAA SS INI DAN KASIH KE AKUUUUUUU</p>
+        <div class="playback-controls">
+            <button class="audio-btn" id="play-btn2">Putar Musik</button>
+            <button class="audio-btn" id="pause-btn2">Jeda Musik</button>
+        </div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="background-music" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
+        Browser kamu tidak mendukung elemen audio.
+    </audio>
+
+    <script>
+        // Elements
+        const questionContainer = document.getElementById('question-container');
+        const resultContainer = document.getElementById('result-container');
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const playBtn2 = document.getElementById('play-btn2');
+        const pauseBtn2 = document.getElementById('pause-btn2');
+        const audio = document.getElementById('background-music');
+        const celebrationHearts = document.getElementById('celebration-hearts');
+
+        // Event listeners
+        yesBtn.addEventListener('click', showAcceptedResult);
+        noBtn.addEventListener('mouseover', moveButton);
+        playBtn.addEventListener('click', playMusic);
+        pauseBtn.addEventListener('click', pauseMusic);
+        playBtn2.addEventListener('click', playMusic);
+        pauseBtn2.addEventListener('click', pauseMusic);
+
+        // Function to show the acceptance result
+        function showAcceptedResult() {
+            questionContainer.style.display = 'none';
+            resultContainer.style.display = 'block';
+            createHeartCelebration();
+            createConfetti();
+            playMusic();
+        }
+
+        // Function to move the "No" button when hovered
+        function moveButton() {
+            const maxX = window.innerWidth - noBtn.offsetWidth - 100;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 100;
+            
+            // Generate random position within visible screen
+            const randomX = Math.max(50, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(50, Math.floor(Math.random() * maxY));
+            
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        // Function to create hearts for celebration
+        function createHeartCelebration() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.style.left = (Math.random() * 80 + 10) + '%';
+                    heart.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                    celebrationHearts.appendChild(heart);
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 3000);
+                }, i * 300);
+            }
+            
+            // Continue creating hearts
+            setInterval(createMoreHearts, 4000);
+        }
+        
+        function createMoreHearts() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.style.left = (Math.random() * 80 + 10) + '%';
+                    heart.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                    celebrationHearts.appendChild(heart);
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 3000);
+                }, i * 300);
+            }
+        }
+
+        // Function to create confetti
+        function createConfetti() {
+            const colors = ['#ff4d88', '#4ecdc4', '#ffd700', '#9b59b6'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                confetti.style.opacity = '1';
+                document.body.appendChild(confetti);
+                
+                // Set the animation
+                confetti.animate([
+                    { 
+                        transform: `translateY(-10vh) rotate(0deg)`, 
+                        opacity: 1 
+                    },
+                    { 
+                        transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`, 
+                        opacity: 0 
+                    }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'linear',
+                    fill: 'forwards'
+                });
+                
+                // Remove after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+
+        // Audio functions
+        function playMusic() {
+            audio.play().catch(error => {
+                console.log('Audio play error:', error);
+            });
+        }
+
+        function pauseMusic() {
+            audio.pause();
+        }
+
+        // Make sure hearts start floating from the beginning
+        window.addEventListener('load', function() {
+            const heartContainer = document.querySelector('.heart-container');
+            const hearts = heartContainer.querySelectorAll('.heart');
+            
+            hearts.forEach(heart => {
+                heart.style.opacity = '1';
+            });
+            
+            // Try to play music (might be blocked by browser)
+            setTimeout(playMusic, 1000);
+        });
+    </script>
+</body>
+</html>
