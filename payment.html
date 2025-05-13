@@ -886,6 +886,48 @@
                 window.location.href = 'confirmation.html';
             });
         });
+
+        // Di bagian form submission
+document.querySelector('.order-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Ambil data dari form
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value,
+        city: document.getElementById('city').value,
+        province: document.getElementById('province').value,
+        postal_code: document.getElementById('postalCode').value,
+        shipping_method: document.querySelector('.shipping-method.active input').value,
+        payment_method: document.querySelector('.payment-tab.active').textContent.trim(),
+        total_amount: orderData.total,
+        order_items: JSON.stringify(orderData.items)
+    };
+    
+    // Kirim data ke server
+    fetch('process_order.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // Redirect ke halaman konfirmasi dengan order ID
+            window.location.href = 'confirmation.html?order_id=' + data.order_id;
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Terjadi kesalahan saat memproses pesanan');
+    });
+});
     </script>
 </body>
 </html>

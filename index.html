@@ -5,57 +5,125 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KlikVa Fashion - Style with Confidence</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Helvetica' ,sans-serif;
+            font-family: 'Helvetica', sans-serif;
         }
 
-        body{
+        body {
             background-color: #2C3E50;
             color: #403818;
             line-height: 1.6;
-        }
-        .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 50px;
-        background-color: #2C3E50;
-        box-shadow: 0 2px 10px rgba(0,0,0,0,1);
-        position: relative;
+            animation: fadeIn 0.5s ease-out;
         }
 
-        .logo{
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #2C3E50;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            animation: slideDown 0.5s ease-out;
+            position: relative;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
             font-size: 24px;
             font-weight: bold;
             color: #F1C40F;
-            align-items: left;
         }
 
-        .nav-links{
+        .nav-links {
             display: flex;
             list-style: none;
         }
 
-        .nav-links li{
+        .nav-links li {
             margin-left: 30px;
         }
 
-        .nav-links a{
+        .nav-links a {
             text-decoration: none;
             color: #F1C40F;
             font-weight: 500;
-            transition:color 0.3;
+            transition: color 0.3s, transform 0.3s;
+            position: relative;
         }
 
-        .nav-links a:hover{
+        .nav-links a:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #F1C40F;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .cart-icon {
+            position: relative;
             color: #F1C40F;
+            font-size: 1.2rem;
         }
 
-        .hero{
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.pinimg.com/736x/01/ef/d3/01efd316e947286f97ea8652698be2bb.jpg');
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-icon:hover .cart-count {
+            transform: scale(1.2);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.pinimg.com/736x/d9/b9/c6/d9b9c6935ce4a5025e4fd5ac37b5c3bc.jpg');
             background-size: cover;
             background-position: center;
             height: 70vh;
@@ -66,28 +134,37 @@
             text-align: center;
             color: #F1C40F;
             padding: 0 20px;
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        .hero-content{
-                max-width: 800px;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .hero h1{
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
             font-size: 3rem;
             margin-bottom: 20px;
+            animation: fadeIn 1s ease-out;
         }
 
-        .hero p{
+        .hero p {
             font-size: 1.2rem;
             margin-bottom: 30px;
+            animation: fadeIn 1.2s ease-out;
         }
 
-        .hashtags{
-            margin: 20px 0;
-            font-style: italic;
-        }
-
-        .shop-btn{
+        .shop-btn {
             display: inline-block;
             background-color: white;
             color: #1b2734;
@@ -96,82 +173,100 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 1.1rem;
-            transition: background-color 0.3s, transform 0.3s;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            animation: fadeIn 1.4s ease-out;
         }
 
-        .shop-btn:hover{
+        .shop-btn:hover {
             background-color: #F1C40F;
-            transform: translate(-3px);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .categories{
+        .shop-btn::after {
+            content: "";
+            display: inline-block;
+            height: 100%;
+            width: 100%;
+            border-radius: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition: all 0.4s;
+            background-color: #F1C40F;
+        }
+
+        .shop-btn:hover::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+
+        .categories {
             padding: 60px 50px;
             text-align: center;
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        .categories h2{
+        .categories h2 {
             font-size: 2rem;
             margin-bottom: 40px;
             color: #F1C40F;
+            animation: fadeIn 0.8s ease-out;
         }
 
-        .category-grid{
+        .category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
             margin-top: 30px;
         }
 
-        .category-card{
+        .category-card {
             background-color: #F1C40F;
             border-radius: 20px;
-            overflow: auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,0,1);
-            transition: transform 0.3s;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.5s ease-out;
         }
 
-        .category-card:hover{
-            transform: translateY(-10px);
+        .category-card:nth-child(1) { animation-delay: 0.2s; }
+        .category-card:nth-child(2) { animation-delay: 0.4s; }
+        .category-card:nth-child(3) { animation-delay: 0.6s; }
+        .category-card:nth-child(4) { animation-delay: 0.8s; }
+
+        .category-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
 
-        .category-img{
+        .category-img {
             height: 200px;
             background-size: cover;
             background-position: center;
+            transition: transform 0.3s ease;
         }
 
-        .category-info{
+        .category-card:hover .category-img {
+            transform: scale(1.1);
+        }
+
+        .category-info {
             padding: 20px;
+            color: #2C3E50;
         }
 
-        .category-info h3{
+        .category-info h3 {
             font-size: 1.3rem;
             margin-bottom: 10px;
+            transition: color 0.3s ease;
         }
 
-        footer{
-            background-color: #161a1f;
-            color: #F1C40F;
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
-        }
-
-        .footer-logo{
-            font-size: 24px;
-            font-weight: bold;
-            color: #F1C40F;
-            margin-bottom: 20px;
-        }
-
-        .social-links{
-            margin: 20px 0;
-        }
-
-        .social-links a{
-            color: white;
-            margin: 0 10px;
-            font-size: 1.5rem;
+        .category-card:hover .category-info h3 {
+            color: #1b2734;
         }
 
         .testimonials {
@@ -179,11 +274,13 @@
             background-color: #34495E;
             color: #F1C40F;
             text-align: center;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .testimonials h2 {
             font-size: 2rem;
             margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out;
         }
 
         .testimonial-grid {
@@ -197,6 +294,17 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .testimonial-card:nth-child(1) { animation-delay: 0.3s; }
+        .testimonial-card:nth-child(2) { animation-delay: 0.5s; }
+        .testimonial-card:nth-child(3) { animation-delay: 0.7s; }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
 
         .testimonial-text {
@@ -208,316 +316,428 @@
         .testimonial-author {
             font-weight: bold;
             color: #F1C40F;
+            transition: color 0.3s ease;
+        }
+
+        .testimonial-card:hover .testimonial-author {
+            color: #f39c12;
         }
 
         .rating {
             color: #F1C40F;
             margin-top: 10px;
             font-size: 1.2rem;
+            transition: transform 0.3s ease;
         }
 
-       /* CSS untuk About Us section */
-.about-us {
-    margin-top: 50px;
-    display: flex;
-    text-align: center;
-    justify-content: space-between;
-    flex-direction: column;
-    color: #F1C40F;
-    padding: 0 50px 60px;
-}
+        .testimonial-card:hover .rating {
+            transform: scale(1.1);
+        }
 
-.about-us h3 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
+        .about-us-section {
+            background-color: #34495E;
+            padding: 60px 50px;
+            color: #F1C40F;
+            animation: fadeInUp 0.8s ease-out;
+        }
 
-.about-us1 {
-    font-size: 15px;
-    max-width: 800px;
-    margin: 0 auto;
-}
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 30px;
+        }
 
-.about-card {
-    background-color: #F1C40F;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    margin-top: 30px;
-}
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 40px;
+            animation: fadeInLeft 0.8s ease-out;
+        }
 
-.about-card img {
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 5px;
-}
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
 
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #F1C40F;
+        }
 
-/* Hide the images by default */
-.mySlides {
-    display: none;
-}
+        .about-text p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #BDC3C7;
+            transition: color 0.3s ease;
+        }
 
-.mySlides img {
-    width: 100%;
-    vertical-align: middle;
-    height: 400px;
-    object-fit: cover;
-}
+        .about-text p:hover {
+            color: #ECF0F1;
+        }
 
-.about-us-section {
-    background-color: #34495E;
-    padding: 60px 50px;
-    color: #F1C40F;
-}
+        .about-text ul {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
 
-.about-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
+        .about-text li {
+            margin-bottom: 10px;
+            color: #BDC3C7;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
 
-.about-text {
-    flex: 1;
-    min-width: 300px;
-    padding-right: 40px;
-}
+        .about-text li:hover {
+            color: #F1C40F;
+            transform: translateX(5px);
+        }
 
-.about-text h3 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #F1C40F;
-}
+        .slideshow-container {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            animation: fadeInRight 0.8s ease-out;
+        }
 
-.about-text p {
-    margin-bottom: 15px;
-    line-height: 1.6;
-}
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
 
-.about-text ul {
-    margin: 20px 0;
-    padding-left: 20px;
-}
+        .mySlides {
+            position: absolute;
+            width: 100%;
+            display: none;
+            transition: all 1.5s ease;
+        }
 
-.about-text li {
-    margin-bottom: 10px;
-}
+        .mySlides img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
 
-.slideshow-container {
-    flex: 1;
-    min-width: 300px;
-    position: relative;
-    height: 500px;
-    overflow: hidden;
-}
+        .mySlides.active img {
+            transform: scale(1.02);
+        }
 
-.mySlides img {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
+        .fade {
+            animation-name: slideFromRight;
+            animation-duration: 1.5s;
+        }
 
-.fade {
-    animation-name: slideFromRight;
-    animation-duration: 1.5s;
-}
+        @keyframes slideFromRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0.4;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
 
-.mySlides {
-    position: absolute;
-    width: 100%;
-    transition: all 1.5s ease;
-}
+        footer {
+            background-color: #161a1f;
+            color: #F1C40F;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+            animation: fadeInUp 1s ease-out;
+        }
 
-/* Back to Top Button */
-.back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background-color: #F1C40F;
-    color: #2C3E50;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    text-decoration: none;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 9999;
-}
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #F1C40F;
+            margin-bottom: 20px;
+        }
 
-.back-to-top:hover {
-    background-color: #2C3E50;
-    color: #F1C40F;
-    transform: translateY(-5px);
-}
+        .social-links {
+            margin: 20px 0;
+        }
 
-.back-to-top.active {
-    opacity: 1;
-    visibility: visible;
-}
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
 
-/* Jika ingin mempertahankan panah navigasi slideshow */
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    background-color: rgba(0,0,0,0.3);
-}
+        .social-links a:hover {
+            color: #F1C40F;
+            transform: translateY(-3px) scale(1.1);
+        }
 
-.next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-}
+        .hashtags {
+            margin-top: 20px;
+            font-style: italic;
+            transition: color 0.3s ease;
+        }
 
-.prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
-}
+        .hashtags:hover {
+            color: #f39c12;
+        }
 
-@media (max-width: 768px) {
-    .about-content {
-        flex-direction: column;
-    }
-    
-    .about-text {
-        padding-right: 0;
-        margin-bottom: 30px;
-    }
-    
-    .slideshow-container {
-        width: 100% !important;
-    }
-    
-    .mySlides img {
-        height: 300px;
-    }
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 9999;
+        }
 
-    .navbar{
-        padding: 15px 20px;
-        flex-direction: column;
-    }
+        .back-to-top:hover {
+            background-color: #2C3E50;
+            color: #F1C40F;
+            transform: translateY(-5px) scale(1.1);
+        }
 
-    .nav-links{
-        margin-top: 15px;
-    }
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
 
-    .nav-links li{
-        margin: 0 10px;
-    }
+        .ai-chat-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 9999;
+            transition: all 0.3s ease;
+        }
 
-    .hero h1{
-        font-size: 2rem;
-    }
+        .ai-chat-btn:hover {
+            background-color: #2C3E50;
+            color: #F1C40F;
+            transform: scale(1.1);
+        }
 
-    .hero p{
-        font-size: 1rem;
-    }
-}
+        .ai-chat-modal {
+            display: none;
+            position: fixed;
+            bottom: 170px;
+            right: 30px;
+            width: 350px;
+            max-height: 500px;
+            background-color: #2C3E50;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 10000;
+            overflow: hidden;
+            animation: fadeInUp 0.5s ease-out;
+        }
 
-/* Animasi untuk Hero Section */
-.hero-content {
-    animation: fadeInUp 1s ease-out both;
-}
+        .ai-chat-header {
+            background-color: #F1C40F;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-/* Animasi untuk Category Cards */
-.category-card {
-    animation: fadeIn 0.5s ease-out both;
-}
+        .ai-chat-header h3 {
+            color: #2C3E50;
+            font-size: 1.2rem;
+        }
 
-.category-card:nth-child(1) { animation-delay: 0.2s; }
-.category-card:nth-child(2) { animation-delay: 0.4s; }
-.category-card:nth-child(3) { animation-delay: 0.6s; }
-.category-card:nth-child(4) { animation-delay: 0.8s; }
+        .ai-chat-close {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #2C3E50;
+            transition: transform 0.3s ease;
+        }
 
-/* Animasi untuk Testimonial */
-.testimonial-card {
-    animation: fadeIn 0.5s ease-out both;
-}
+        .ai-chat-close:hover {
+            transform: scale(1.2);
+        }
 
-.testimonial-card:nth-child(1) { animation-delay: 0.3s; }
-.testimonial-card:nth-child(2) { animation-delay: 0.5s; }
-.testimonial-card:nth-child(3) { animation-delay: 0.7s; }
+        .ai-chat-body {
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            background-color: #34495E;
+        }
 
-/* Animasi untuk About Us */
-.about-text {
-    animation: fadeInLeft 1s ease-out both;
-}
+        .ai-chat-message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
 
-.slideshow-container {
-    animation: fadeInRight 1s ease-out both;
-}
+        .ai-chat-message:hover {
+            transform: translateY(-2px);
+        }
 
-/* Keyframes */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+        .ai-chat-message.user {
+            background-color: #F1C40F;
+            color: #2C3E50;
+            margin-left: 20%;
+        }
 
-@keyframes fadeInUp {
-    from { 
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to { 
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        .ai-chat-message.bot {
+            background-color: #ECF0F1;
+            color: #2C3E50;
+            margin-right: 20%;
+        }
 
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
+        .ai-chat-message.typing {
+            background-color: #ECF0F1;
+            color: #2C3E50;
+            margin-right: 20%;
+            font-style: italic;
+        }
 
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
+        .ai-chat-input {
+            display: flex;
+            padding: 10px;
+            background-color: #2C3E50;
+        }
 
-@keyframes fade {
-    from {opacity: .4} 
-    to {opacity: 1}
-}
+        .ai-chat-input input {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            background-color: #ECF0F1;
+            color: #2C3E50;
+            transition: border-color 0.3s ease;
+        }
 
-@keyframes slideFromRight {
-    from {
-        transform: translateX(100%);
-        opacity: 0.4;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
+        .ai-chat-input input:focus {
+            border: 1px solid #F1C40F;
+            outline: none;
+        }
+
+        .ai-chat-input button {
+            padding: 8px 15px;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ai-chat-input button:hover {
+            background-color: #f39c12;
+            transform: translateY(-2px);
+        }
+
+        .quick-reply {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .quick-reply button {
+            padding: 8px 15px;
+            background-color: #F1C40F;
+            color: #2C3E50;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .quick-reply button:hover {
+            background-color: #2C3E50;
+            color: #F1C40F;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                margin-top: 15px;
+            }
+
+            .nav-links li {
+                margin: 0 10px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .slideshow-container {
+                width: 100%;
+            }
+
+            .mySlides img {
+                height: 300px;
+            }
+
+            .ai-chat-modal {
+                width: 90%;
+                right: 5%;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="canonical" href="index.html" />
@@ -527,10 +747,16 @@
         <div class="logo">KLIKVA</div>
         <div class="nav-links-container">
             <ul class="nav-links">
-                <li><a href="index.html">HOME</a></li>
+                <li><a href="index.html" class="active">HOME</a></li>
                 <li><a href="item.html">ITEM</a></li>
                 <li><a href="order.html">ORDER</a></li>
                 <li><a href="outlet.html">OUTLET</a></li>
+                <li>
+                    <a href="order.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -583,10 +809,11 @@
     <section class="testimonials">
         <h2>TESTIMONI PELANGGAN</h2>
         <div class="testimonial-grid">
-            <!-- Testimoni 1 -->
             <div class="testimonial-card">
                 <img src="https://randomuser.me/api/portraits/women/44.jpg" 
-                style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: block;">
+                     style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: block; transition: transform 0.3s ease;"
+                     onmouseover="this.style.transform='scale(1.1)'"
+                     onmouseout="this.style.transform='scale(1)'">
                 <p class="testimonial-text">"Produknya berkualitas banget! Materialnya nyaman dipakai dan harganya terjangkau."</p>
                 <p class="testimonial-author">- Sarah, Bandung</p>
                 <div class="rating">
@@ -598,10 +825,11 @@
                 </div>
             </div>
 
-            <!-- Testimoni 2 -->
             <div class="testimonial-card">
                 <img src="https://randomuser.me/api/portraits/men/32.jpg" 
-                style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: block;">
+                     style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: block; transition: transform 0.3s ease;"
+                     onmouseover="this.style.transform='scale(1.1)'"
+                     onmouseout="this.style.transform='scale(1)'">
                 <p class="testimonial-text">"Pengiriman cepat dan packing aman. Saya sudah belanja 3 kali di sini!"</p>
                 <p class="testimonial-author">- Rizal, Jakarta</p>
                 <div class="rating">
@@ -613,10 +841,11 @@
                 </div>
             </div>
             
-            <!-- Testimoni 3 -->
             <div class="testimonial-card">
                 <img src="https://randomuser.me/api/portraits/women/65.jpg" 
-                style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: block;">
+                     style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: block; transition: transform 0.3s ease;"
+                     onmouseover="this.style.transform='scale(1.1)'"
+                     onmouseout="this.style.transform='scale(1)'">
                 <p class="testimonial-text">"Desainnya trendy banget, cocok untuk anak muda. Recomended!"</p>
                 <p class="testimonial-author">- Dian, Surabaya</p>
                 <div class="rating">
@@ -646,15 +875,14 @@
                 </ul>
             </div>
             <div class="slideshow-container">
-                <!-- Gambar slideshow -->
                 <div class="mySlides fade">
-                    <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/6/14/ecb52a5f-0da9-43f1-9d2f-75e502b63498.jpg.webp?ect=4g" alt="Produk KlikVa 1" style="width:100%">
+                    <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/6/14/ecb52a5f-0da9-43f1-9d2f-75e502b63498.jpg.webp?ect=4g" alt="Produk KlikVa 1">
                 </div>
                 <div class="mySlides fade">
-                    <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2023/7/18/65476342-53ed-4271-ae54-5dc4bdd04f24.jpg.webp?ect=4g" alt="Produk KlikVa 2" style="width:100%">
+                    <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2023/7/18/65476342-53ed-4271-ae54-5dc4bdd04f24.jpg.webp?ect=4g" alt="Produk KlikVa 2">
                 </div>
                 <div class="mySlides fade">
-                    <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/8/15/4fc1e823-05a8-483e-90c4-0c610e7153ac.jpg.webp?ect=4g" alt="Produk KlikVa 3" style="width:100%">
+                    <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/8/15/4fc1e823-05a8-483e-90c4-0c610e7153ac.jpg.webp?ect=4g" alt="Produk KlikVa 3">
                 </div>
             </div>
         </div>
@@ -669,47 +897,70 @@
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="https://www.tiktok.com/@brillianwicaksono0" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
         </div>
-        <p>&copy; 2025 KLIKVA Fashion. All Rights Reserved.</p>
+        <p>© 2025 KLIKVA Fashion. All Rights Reserved.</p>
         <div class="hashtags">#KLIKVAFASHION #STYLEWITHCONFIDENCE</div>
     </footer>
 
-    <!-- Back to Top Button -->
     <a href="#" id="backToTop" class="back-to-top">
         <i class="fas fa-arrow-up"></i>
     </a>
 
+    <div class="ai-chat-btn" id="aiChatBtn">
+        <i class="fas fa-robot"></i>
+    </div>
+    <div class="ai-chat-modal" id="aiChatModal">
+        <div class="ai-chat-header">
+            <h3>KlikVa Fashion Assistant</h3>
+            <span class="ai-chat-close" id="aiChatClose">×</span>
+        </div>
+        <div class="ai-chat-body" id="aiChatBody">
+            <div class="ai-chat-message bot">
+                Halo! Cari outfit apa? Coba ketik "casual", "formal", "pesta", atau pilih di bawah: 
+                <div class="quick-reply">
+                    <button onclick="quickReply('Casual')">Casual</button>
+                    <button onclick="quickReply('Formal')">Formal</button>
+                    <button onclick="quickReply('Pesta')">Pesta</button>
+                    <button onclick="quickReply('Aksesoris')">Aksesoris</button>
+                    <button onclick="quickReply('Contact')">Hubungi Kami</button>
+                </div>
+            </div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="aiChatInput" placeholder="Ketik gaya yang kamu mau...">
+            <button id="aiChatSend">Kirim</button>
+        </div>
+    </div>
+
     <script>
+        // Cart functionality
+        function updateCartCount() {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const count = cartItems.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+
         // Slideshow
         let slideIndex = 0;
 
         function showSlides() {
             let slides = document.getElementsByClassName("mySlides");
-            
-            // Sembunyikan semua slide
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
+                slides[i].classList.remove("active");
             }
-            
-            // Pindah ke slide berikutnya
             slideIndex++;
             if (slideIndex > slides.length) { slideIndex = 1 }
-            
-            // Tampilkan slide saat ini dengan animasi
             slides[slideIndex-1].style.display = "block";
-            slides[slideIndex-1].style.animation = "slideFromRight 1.5s";
-            
-            // Ubah slide setiap 3 detik
+            slides[slideIndex-1].classList.add("active");
             setTimeout(showSlides, 3000);
         }
 
-        // Back to Top Button
+        // Back to Top and Other Interactivity
         document.addEventListener('DOMContentLoaded', function() {
-            // Inisialisasi slideshow
             showSlides();
-            
-            // Back to Top functionality
+            updateCartCount();
+
             const backToTopButton = document.getElementById('backToTop');
-            
             window.addEventListener('scroll', () => {
                 if (window.pageYOffset > 300) {
                     backToTopButton.classList.add('active');
@@ -717,61 +968,136 @@
                     backToTopButton.classList.remove('active');
                 }
             });
-            
+
             backToTopButton.addEventListener('click', (e) => {
                 e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
-        });
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
+            // AI Chatbot Functionality
+            const aiChatBtn = document.getElementById('aiChatBtn');
+            const aiChatModal = document.getElementById('aiChatModal');
+            const aiChatClose = document.getElementById('aiChatClose');
+            const aiChatInput = document.getElementById('aiChatInput');
+            const aiChatSend = document.getElementById('aiChatSend');
+            const aiChatBody = document.getElementById('aiChatBody');
 
-// Untuk link ke halaman lain
-document.querySelector('.shop-btn').addEventListener('click', function(e) {
-    if(this.getAttribute('href').endsWith('.html')) {
-        // Biarkan link bekerja normal
-        return true;
-    }
-    e.preventDefault();
-    // Tambahkan efek scroll jika perlu
-});
+            aiChatBtn.addEventListener('click', () => {
+                aiChatModal.style.display = aiChatModal.style.display === 'block' ? 'none' : 'block';
+            });
 
-    // Animasi saat scroll
-    document.addEventListener('DOMContentLoaded', function() {
-        const animateOnScroll = function() {
-            const elements = document.querySelectorAll('.animate-on-scroll');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementPosition < windowHeight - 100) {
-                    element.classList.add('animated');
+            aiChatClose.addEventListener('click', () => {
+                aiChatModal.style.display = 'none';
+            });
+
+            function addMessage(text, type, quickReplies = []) {
+                const message = document.createElement('div');
+                message.className = `ai-chat-message ${type}`;
+                message.innerHTML = text;
+                if (quickReplies.length > 0) {
+                    const replyDiv = document.createElement('div');
+                    replyDiv.className = 'quick-reply';
+                    quickReplies.forEach(reply => {
+                        const button = document.createElement('button');
+                        button.textContent = reply.label;
+                        button.onclick = () => quickReply(reply.value);
+                        replyDiv.appendChild(button);
+                    });
+                    message.appendChild(replyDiv);
+                }
+                aiChatBody.appendChild(message);
+                aiChatBody.scrollTop = aiChatBody.scrollHeight;
+            }
+
+            function showTypingIndicator() {
+                addMessage('Sedang mengetik...', 'typing');
+                setTimeout(() => {
+                    const typingMessage = aiChatBody.querySelector('.typing');
+                    if (typingMessage) typingMessage.remove();
+                }, 800);
+            }
+
+            window.quickReply = function(value) {
+                addMessage(value, 'user');
+                processInput(value);
+            };
+
+            function getRecommendation(input) {
+                input = input.toLowerCase();
+                const quickReplies = [
+                    { label: 'Casual', value: 'Casual' },
+                    { label: 'Formal', value: 'Formal' },
+                    { label: 'Pesta', value: 'Pesta' },
+                    { label: 'Aksesoris', value: 'Aksesoris' },
+                    { label: 'Hubungi Kami', value: 'Contact' }
+                ];
+
+                if (input.includes('casual') || input.includes('santai') || input.includes('hari') || input.includes('keren')) {
+                    return {
+                        text: "Gaya casual? Coba <strong>Faith Industries Graffity Hopper Hoodie</strong> (Rp 399.000), nyaman untuk sehari-hari. Lihat di <a href='item.html'>ITEM</a>! Butuh bantuan lain? Hubungi kami di <a href='tel:085335627469'>085335627469</a>. Mau coba gaya lain?",
+                        quickReplies
+                    };
+                } else if (input.includes('formal') || input.includes('kantor') || input.includes('resmi')) {
+                    return {
+                        text: "Untuk formal, saya sarankan <strong>Faith Industries Harrington Jacket</strong> (Rp 1.300.000), elegan dan profesional. Cek di <a href='item.html'>ITEM</a>! Butuh bantuan lain? Hubungi kami di <a href='tel:085335627469'>085335627469</a>. Ingin gaya lain?",
+                        quickReplies
+                    };
+                } else if (input.includes('pesta') || input.includes('party')) {
+                    return {
+                        text: "Pesta? <strong>Faith Industries Racing Series Leather Jacket</strong> (Rp 1.299.000) bikin kamu standout. Lihat di <a href='item.html'>ITEM</a>! Butuh bantuan lain? Hubungi kami di <a href='tel:085335627469'>085335627469</a>. Coba gaya lain?",
+                        quickReplies
+                    };
+                } else if (input.includes('aksesoris') || input.includes('accessories')) {
+                    return {
+                        text: "Lengkapi gaya dengan <strong>FTH Umbrella</strong> (Rp 199.000), payung stylish dan praktis. Cek di <a href='item.html'>ITEM</a>! Butuh bantuan lain? Hubungi kami di <a href='tel:085335627469'>085335627469</a>. Mau lihat gaya lain?",
+                        quickReplies
+                    };
+                } else if (input.includes('jaket') || input.includes('jacket')) {
+                    return {
+                        text: "Jaket keren? <strong>Faith Industries Harrington Jacket</strong> (Rp 1.300.000) cocok untuk berbagai acara. Lihat di <a href='item.html'>ITEM</a>! Butuh bantuan lain? Hubungi kami di <a href='tel:085335627469'>085335627469</a>. Ingin gaya lain?",
+                        quickReplies
+                    };
+                } else if (input.includes('harga') || input.includes('murah') || input.includes('budget')) {
+                    return {
+                        text: "Cari yang terjangkau? <strong>FTH Umbrella</strong> (Rp 199.000) stylish dan ramah di kantong. Cek di <a href='item.html'>ITEM</a>! Butuh bantuan lain? Hubungi kami di <a href='tel:085335627469'>085335627469</a>. Mau gaya lain?",
+                        quickReplies
+                    };
+                } else if (input.includes('contact') || input.includes('hubungi') || input.includes('kontak')) {
+                    return {
+                        text: "Ingin menghubungi kami? Silakan telepon di <a href='tel:085335627469'>085335627469</a> untuk bantuan lebih lanjut. Atau, cari gaya lain di bawah ini:",
+                        quickReplies
+                    };
+                } else {
+                    return {
+                        text: "Hmm, coba ketik 'casual', 'formal', 'pesta', atau 'aksesoris'. Untuk bantuan lebih lanjut, hubungi kami di <a href='tel:085335627469'>085335627469</a>. Atau pilih di bawah:",
+                        quickReplies
+                    };
+                }
+            }
+
+            function processInput(input) {
+                showTypingIndicator();
+                const response = getRecommendation(input);
+                setTimeout(() => {
+                    addMessage(response.text, 'bot', response.quickReplies);
+                }, 800);
+            }
+
+            aiChatSend.addEventListener('click', () => {
+                const userInput = aiChatInput.value.trim();
+                if (userInput) {
+                    addMessage(userInput, 'user');
+                    processInput(userInput);
+                    aiChatInput.value = '';
                 }
             });
-        };
-        
-        // Tambahkan class animate-on-scroll ke elemen yang ingin dianimasikan
-        const sections = document.querySelectorAll('section');
-        sections.forEach(section => {
-            section.classList.add('animate-on-scroll');
-        });
-        
-        // Jalankan saat load dan scroll
-        window.addEventListener('load', animateOnScroll);
-        window.addEventListener('scroll', animateOnScroll);
-    });
 
+            aiChatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    aiChatSend.click();
+                }
+            });
+        });
     </script>
 </body>
 </html>
