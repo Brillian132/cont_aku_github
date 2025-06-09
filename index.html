@@ -1,1102 +1,773 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KlikVa Fashion - Style with Confidence</title>
+    <title>INDOMIE - Home of Delicious Instant Noodles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #E31937;
+            --secondary: #FFD700;
+            --light: #F5F5F5;
+            --dark: #1A1A1A;
+            --accent: #FF6F61;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Helvetica', sans-serif;
+            font-family: 'Arial', sans-serif;
         }
-
+        
         body {
-            background-color: #2C3E50;
-            color: #403818;
+            background-color: #A1121B;
+            color: var(--dark);
             line-height: 1.6;
-            animation: fadeIn 0.5s ease-out;
+            overflow-x: hidden;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 100px;
+            background-color: #ffe900;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
-            background-color: #2C3E50;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            animation: slideDown 0.5s ease-out;
-            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .logo img {
+            height: 90px;
+            width: auto;
+            position: absolute;
+            z-index: 88;
+            top: 0;
+            left: 0;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #F1C40F;
-        }
-
-        .nav-links {
+        .nav-menu {
             display: flex;
-            list-style: none;
+            gap: 2rem;
+            font-size: 1.1rem;
         }
 
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
+        .nav-menu a {
             text-decoration: none;
-            color: #F1C40F;
+            color: var(--dark);
             font-weight: 500;
-            transition: color 0.3s, transform 0.3s;
             position: relative;
+            transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            color: #ffffff;
-            transform: translateY(-2px);
+        .nav-menu a:hover {
+            color: var(--primary);
         }
 
-        .nav-links a.active {
-            color: #ffffff;
-            font-weight: bold;
-        }
-
-        .nav-links a::after {
+        .nav-menu a::after {
             content: '';
             position: absolute;
             width: 0;
             height: 2px;
             bottom: -5px;
             left: 0;
-            background-color: #F1C40F;
-            transition: width 0.3s ease;
+            background-color: var(--primary);
+            transition: width 0.3s;
         }
 
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
+        .nav-menu a:hover::after {
             width: 100%;
         }
 
-        .cart-icon {
-            position: relative;
-            color: #F1C40F;
-            font-size: 1.2rem;
+        .nav-menu a:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
         }
 
-        .cart-count {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: #F1C40F;
-            color: #2C3E50;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .cart-icon:hover .cart-count {
-            transform: scale(1.2);
-        }
-
+        /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.pinimg.com/736x/d9/b9/c6/d9b9c6935ce4a5025e4fd5ac37b5c3bc.jpg');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.pinimg.com/736x/bd/12/ff/bd12ff6ed1c42045ab1bee4b22f8415a.jpg');
             background-size: cover;
             background-position: center;
-            height: 70vh;
+            height: 80vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             text-align: center;
-            color: #F1C40F;
-            padding: 0 20px;
-            animation: fadeInUp 0.8s ease-out;
+            color: var(--light);
+            padding: 0 2rem;
         }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        
         .hero-content {
             max-width: 800px;
         }
-
+        
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            animation: fadeIn 1s ease-out;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-
+        
         .hero p {
             font-size: 1.2rem;
-            margin-bottom: 30px;
-            animation: fadeIn 1.2s ease-out;
+            margin-bottom: 2rem;
+            line-height: 1.6;
         }
-
-        .shop-btn {
+        
+        .btn {
             display: inline-block;
-            background-color: white;
-            color: #1b2734;
-            padding: 12px 30px;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary);
+            color: var(--light);
+            border: none;
             border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            animation: fadeIn 1.4s ease-out;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-
-        .shop-btn:hover {
-            background-color: #F1C40F;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-
-        .shop-btn::after {
-            content: "";
-            display: inline-block;
-            height: 100%;
-            width: 100%;
-            border-radius: 30px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            transition: all 0.4s;
-            background-color: #F1C40F;
+        
+        /* History Section */
+        .history {
+            padding: 5rem 5%;
+            background-color: #920F14;
         }
-
-        .shop-btn:hover::after {
-            transform: scaleX(1.4) scaleY(1.6);
-            opacity: 0;
-        }
-
-        .categories {
-            padding: 60px 50px;
-            text-align: center;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .categories h2 {
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: #F1C40F;
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        .category-grid {
+        
+        .history-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
         }
-
-        .category-card {
-            background-color: #F1C40F;
-            border-radius: 20px;
+        
+        .history-img {
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeIn 0.5s ease-out;
         }
-
-        .category-card:nth-child(1) { animation-delay: 0.2s; }
-        .category-card:nth-child(2) { animation-delay: 0.4s; }
-        .category-card:nth-child(3) { animation-delay: 0.6s; }
-        .category-card:nth-child(4) { animation-delay: 0.8s; }
-
-        .category-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        
+        .history-img img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
-
-        .category-img {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.3s ease;
+        
+        .history-content h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
         }
-
-        .category-card:hover .category-img {
-            transform: scale(1.1);
+        
+        .history-content p {
+            color: white;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
-
-        .category-info {
-            padding: 20px;
-            color: #2C3E50;
+        
+        /* Products Section */
+        .products {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
-
-        .category-info h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
-        }
-
-        .category-card:hover .category-info h3 {
-            color: #1b2734;
-        }
-
-        .testimonials {
-            padding: 60px 50px;
-            background-color: #34495E;
-            color: #F1C40F;
+        
+        .section-title {
             text-align: center;
-            animation: fadeInUp 0.8s ease-out;
+            margin-bottom: 3rem;
         }
-
-        .testimonials h2 {
-            font-size: 2rem;
-            margin-bottom: 40px;
-            animation: fadeIn 0.8s ease-out;
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
         }
-
-        .testimonial-grid {
+        
+        .section-title p {
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 2rem;
         }
-
-        .testimonial-card {
-            background-color: #2C3E50;
-            padding: 30px;
+        
+        .product-card {
+            background-color: var(--light);
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .testimonial-card:nth-child(1) { animation-delay: 0.3s; }
-        .testimonial-card:nth-child(2) { animation-delay: 0.5s; }
-        .testimonial-card:nth-child(3) { animation-delay: 0.7s; }
-
-        .testimonial-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 20px;
-            color: #ECF0F1;
-        }
-
-        .testimonial-author {
-            font-weight: bold;
-            color: #F1C40F;
-            transition: color 0.3s ease;
-        }
-
-        .testimonial-card:hover .testimonial-author {
-            color: #f39c12;
-        }
-
-        .rating {
-            color: #F1C40F;
-            margin-top: 10px;
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .testimonial-card:hover .rating {
-            transform: scale(1.1);
-        }
-
-        .about-us-section {
-            background-color: #34495E;
-            padding: 60px 50px;
-            color: #F1C40F;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .about-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-            padding-right: 40px;
-            animation: fadeInLeft 0.8s ease-out;
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .about-text h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #F1C40F;
-        }
-
-        .about-text p {
-            margin-bottom: 15px;
-            line-height: 1.6;
-            color: #BDC3C7;
-            transition: color 0.3s ease;
-        }
-
-        .about-text p:hover {
-            color: #ECF0F1;
-        }
-
-        .about-text ul {
-            margin: 20px 0;
-            padding-left: 20px;
-        }
-
-        .about-text li {
-            margin-bottom: 10px;
-            color: #BDC3C7;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .about-text li:hover {
-            color: #F1C40F;
-            transform: translateX(5px);
-        }
-
-        .slideshow-container {
-            flex: 1;
-            min-width: 300px;
-            position: relative;
-            height: 500px;
             overflow: hidden;
-            animation: fadeInRight 0.8s ease-out;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
         }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
         }
-
-        .mySlides {
-            position: absolute;
+        
+        .product-img {
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .product-img img {
             width: 100%;
-            display: none;
-            transition: all 1.5s ease;
-        }
-
-        .mySlides img {
-            width: 100%;
-            height: 500px;
+            height: 100%;
             object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
+            transition: transform 0.5s;
         }
-
-        .mySlides.active img {
-            transform: scale(1.02);
-        }
-
-        .fade {
-            animation-name: slideFromRight;
-            animation-duration: 1.5s;
-        }
-
-        @keyframes slideFromRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0.4;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        footer {
-            background-color: #161a1f;
-            color: #F1C40F;
-            text-align: center;
-            padding: 40px 0;
-            margin-top: 50px;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .footer-logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #F1C40F;
-            margin-bottom: 20px;
-        }
-
-        .social-links {
-            margin: 20px 0;
-        }
-
-        .social-links a {
-            color: white;
-            margin: 0 15px;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .social-links a:hover {
-            color: #F1C40F;
-            transform: translateY(-3px) scale(1.1);
-        }
-
-        .hashtags {
-            margin-top: 20px;
-            font-style: italic;
-            transition: color 0.3s ease;
-        }
-
-        .hashtags:hover {
-            color: #f39c12;
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background-color: #F1C40F;
-            color: #2C3E50;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            text-decoration: none;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 9999;
-        }
-
-        .back-to-top:hover {
-            background-color: #2C3E50;
-            color: #F1C40F;
-            transform: translateY(-5px) scale(1.1);
-        }
-
-        .back-to-top.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .ai-chat-btn {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: #F1C40F;
-            color: #2C3E50;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            cursor: pointer;
-            z-index: 9999;
-            transition: all 0.3s ease;
-        }
-
-        .ai-chat-btn:hover {
-            background-color: #2C3E50;
-            color: #F1C40F;
+        
+        .product-card:hover .product-img img {
             transform: scale(1.1);
         }
-
-        .ai-chat-modal {
-            display: none;
-            position: fixed;
-            bottom: 170px;
-            right: 30px;
-            width: 350px;
-            max-height: 500px;
-            background-color: #2C3E50;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            z-index: 10000;
-            overflow: hidden;
-            animation: fadeInUp 0.5s ease-out;
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .product-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(250px, 1fr) repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: left;
+            align-items: start;
+        }
+        
+        .footer-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            background-color: #333;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #444;
+            color: #999;
         }
 
-        .ai-chat-header {
-            background-color: #F1C40F;
-            padding: 10px;
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            background-color: var(--light);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            overflow: hidden;
+            display: none;
+        }
+
+        .chatbot-container.active {
+            display: block;
+        }
+
+        .chatbot-header {
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .ai-chat-header h3 {
-            color: #2C3E50;
+        .chatbot-header h3 {
             font-size: 1.2rem;
         }
 
-        .ai-chat-close {
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.2rem;
             cursor: pointer;
-            font-size: 1.2rem;
-            color: #2C3E50;
-            transition: transform 0.3s ease;
         }
 
-        .ai-chat-close:hover {
-            transform: scale(1.2);
-        }
-
-        .ai-chat-body {
-            padding: 15px;
+        .chatbot-body {
             max-height: 400px;
             overflow-y: auto;
-            background-color: #34495E;
+            padding: 1rem;
         }
 
-        .ai-chat-message {
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
+        .chatbot-message {
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
         }
 
-        .ai-chat-message:hover {
-            transform: translateY(-2px);
+        .chatbot-message.bot {
+            background-color: var(--secondary);
+            color: var(--dark);
+            margin-right: 10%;
         }
 
-        .ai-chat-message.user {
-            background-color: #F1C40F;
-            color: #2C3E50;
-            margin-left: 20%;
+        .chatbot-message.user {
+            background-color: var(--primary);
+            color: var(--light);
+            margin-left: 10%;
+            text-align: right;
         }
 
-        .ai-chat-message.bot {
-            background-color: #ECF0F1;
-            color: #2C3E50;
-            margin-right: 20%;
-        }
-
-        .ai-chat-message.typing {
-            background-color: #ECF0F1;
-            color: #2C3E50;
-            margin-right: 20%;
-            font-style: italic;
-        }
-
-        .ai-chat-input {
+        .chatbot-input {
             display: flex;
-            padding: 10px;
-            background-color: #2C3E50;
+            padding: 1rem;
+            border-top: 1px solid #ddd;
         }
 
-        .ai-chat-input input {
+        .chatbot-input input {
             flex: 1;
-            padding: 8px;
+            padding: 0.5rem;
             border: none;
-            border-radius: 5px;
-            margin-right: 10px;
-            background-color: #ECF0F1;
-            color: #2C3E50;
-            transition: border-color 0.3s ease;
-        }
-
-        .ai-chat-input input:focus {
-            border: 1px solid #F1C40F;
+            border-radius: 20px;
             outline: none;
+            margin-right: 0.5rem;
         }
 
-        .ai-chat-input button {
-            padding: 8px 15px;
-            background-color: #F1C40F;
-            color: #2C3E50;
+        .chatbot-input button {
+            background-color: var(--primary);
+            color: var(--light);
             border: none;
-            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s;
         }
 
-        .ai-chat-input button:hover {
-            background-color: #f39c12;
-            transform: translateY(-2px);
+        .chatbot-input button:hover {
+            background-color: var(--secondary);
+            color: var(--dark);
         }
 
-        .quick-reply {
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: var(--light);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .quick-reply button {
-            padding: 8px 15px;
-            background-color: #F1C40F;
-            color: #2C3E50;
-            border: none;
-            border-radius: 15px;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
         }
 
-        .quick-reply button:hover {
-            background-color: #2C3E50;
-            color: #F1C40F;
-            transform: translateY(-2px);
+        .chatbot-toggle:hover {
+            background-color: var(--secondary);
+            color: var(--dark);
+        }
+
+        @media (max-width: 992px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .logo img {
+                height: 70px;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
         }
 
         @media (max-width: 768px) {
             .navbar {
-                padding: 15px 20px;
                 flex-direction: column;
+                gap: 1rem;
             }
-
-            .nav-links {
-                margin-top: 15px;
+            
+            .logo {
+                height: 70px;
             }
-
-            .nav-links li {
-                margin: 0 10px;
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
             }
-
+            
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
+            }
+            
+            .history-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-image {
+                max-width: 200px;
+                margin: 0 auto;
             }
 
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .about-content {
-                flex-direction: column;
-            }
-
-            .about-text {
-                padding-right: 0;
-                margin-bottom: 30px;
-            }
-
-            .slideshow-container {
-                width: 100%;
-            }
-
-            .mySlides img {
-                height: 300px;
-            }
-
-            .ai-chat-modal {
+            .chatbot-container {
                 width: 90%;
-                right: 5%;
+                bottom: 10px;
+                right: 10px;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="canonical" href="index.html" />
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">KLIKVA</div>
-        <div class="nav-links-container">
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">HOME</a></li>
-                <li><a href="item.html">ITEM</a></li>
-                <li><a href="order.html">ORDER</a></li>
-                <li><a href="outlet.html">OUTLET</a></li>
-                <li>
-                    <a href="order.html" class="cart-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count" id="cart-count">0</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="https://www.indomie.com/img/icon/logo-indomie.png" alt="Indomie Logo">
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html">HOME</a>
+                <a href="produk.html">PRODUK</a>
+                <a href="aboutus.html">ABOUT US</a>
+                <a href="point.html">POINT</a>
+                <a href="mypage.html">MY PAGE</a>
+                <a href="game.html">MINI GAME</a>
+                <a href="event.html">EVENT</a>
+            </nav>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>SELAMAT DATANG DI KLIKVA</h1>
-            <p>Fashion trendy, nyaman, dan terjangkau. Untuk penampilan terbaik Anda.</p>
-            <a href="item.html" class="shop-btn">SHOP NOW</a>
-        </div>
-    </section>
-    
-    <section class="categories">
-        <h2>KATEGORI PRODUK</h2>
-        <div class="category-grid">
-            <div class="category-card">
-                <div class="category-img" style="background-image: url('https://img.freepik.com/free-photo/blonde-woman-straw-hat-standing-near-wall-with-barefoot_7502-8936.jpg?t=st=1744965270~exp=1744968870~hmac=f6f3b949374d4d2dc4b0103b8121342bd316369d4e3c1f53a0d6a695c9a91051&w=740');"></div>
-                <div class="category-info">
-                    <h3>WANITA</h3>
-                    <p>Koleksi terbaru untuk wanita modern</p>
-                </div>
-            </div>
-            
-            <div class="category-card">
-                <div class="category-img" style="background-image: url('https://img.freepik.com/free-photo/full-shot-man-posing-grandstands_23-2149659142.jpg?t=st=1744965358~exp=1744968958~hmac=509a73d7e2f40c54de8de04a49a8d8fb3b3dae63fc2a5d74b8e06602d11882c7&w=740');"></div>
-                <div class="category-info">
-                    <h3>PRIA</h3>
-                    <p>Gaya kekinian untuk pria</p>
-                </div>
-            </div>
-            
-            <div class="category-card">
-                <div class="category-img" style="background-image: url('https://img.freepik.com/free-photo/full-shot-kids-posing-together_23-2149853383.jpg?t=st=1744993840~exp=1744997440~hmac=67bd350d2bbd03f9fa1544787d44f609c684d7dd6fc37e14ceb7eac8aabfd8d4&w=740');"></div>
-                <div class="category-info">
-                    <h3>ANAK-ANAK</h3>
-                    <p>Fashion nyaman untuk si kecil</p>
-                </div>
-            </div>
-            
-            <div class="category-card">
-                <div class="category-img" style="background-image: url('https://img.freepik.com/free-photo/model-career-kit-still-life_23-2150229758.jpg?t=st=1744993910~exp=1744997510~hmac=d40fa3019cd84391a6f7f4605871a4dc54b98fb46c666e06d33b0c29ea5435a9&w=740');"></div>
-                <div class="category-info">
-                    <h3>AKSESORIS</h3>
-                    <p>Pelengkap penampilan Anda</p>
-                </div>
-            </div>
+            <h1>INDOMIE GAK ADA LAWAN!</h1>
+            <p>Rasa yang melegenda sejak 1970, menemani setiap momen spesial Anda</p>
+            <a href="produk.html" class="btn">EXPLORE PRODUCTS</a>
         </div>
     </section>
 
-    <section class="testimonials">
-        <h2>TESTIMONI PELANGGAN</h2>
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" 
-                     style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: block; transition: transform 0.3s ease;"
-                     onmouseover="this.style.transform='scale(1.1)'"
-                     onmouseout="this.style.transform='scale(1)'">
-                <p class="testimonial-text">"Produknya berkualitas banget! Materialnya nyaman dipakai dan harganya terjangkau."</p>
-                <p class="testimonial-author">- Sarah, Bandung</p>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
+    <!-- Products Section -->
+    <section class="products">
+        <div class="section-title">
+            <h2>BEST PRODUCTS</h2>
+            <p>Temukan berbagai varian Indomie favorit Anda</p>
+        </div>
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://www.indomie.com/uploads/product/indomie-mi-goreng-special_thumb_094906798.png" alt="Indomie Mi Goreng">
                 </div>
-            </div>
-
-            <div class="testimonial-card">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" 
-                     style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: block; transition: transform 0.3s ease;"
-                     onmouseover="this.style.transform='scale(1.1)'"
-                     onmouseout="this.style.transform='scale(1)'">
-                <p class="testimonial-text">"Pengiriman cepat dan packing aman. Saya sudah belanja 3 kali di sini!"</p>
-                <p class="testimonial-author">- Rizal, Jakarta</p>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
+                <div class="product-info">
+                    <h3>INDOMIE MI GORENG</h3>
+                    <p>Rasa original yang sudah melegenda</p>
+                    <div class="price">Rp 2.800</div>
                 </div>
             </div>
             
-            <div class="testimonial-card">
-                <img src="https://randomuser.me/api/portraits/women/65.jpg" 
-                     style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px; display: block; transition: transform 0.3s ease;"
-                     onmouseover="this.style.transform='scale(1.1)'"
-                     onmouseout="this.style.transform='scale(1)'">
-                <p class="testimonial-text">"Desainnya trendy banget, cocok untuk anak muda. Recomended!"</p>
-                <p class="testimonial-author">- Dian, Surabaya</p>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://www.indomie.com/uploads/product/indomie-mi-goreng-barbeque-chicken-flavour_thumb_170302372.png" alt="Indomie Soto">
+                </div>
+                <div class="product-info">
+                    <h3>Indomie Mi Goreng Barbeque Chicken</h3>
+                    <p>Rasa ayam panggang yang kaya dengan aroma smoky, memberikan sensasi BBQ yang autentik</p>
+                    <div class="price">Rp 2.600</div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://www.indomie.com/uploads/product/indomie-mi-goreng-hot-spicy_thumb_113950389.png" alt="Indomie Ayam Bawang">
+                </div>
+                <div class="product-info">
+                    <h3>Indomie Mi Goreng Hot & Spicy</h3>
+                    <p>Pedas menggigit dengan cita rasa khas Indomie, cocok untuk pecinta makanan pedas.</p>
+                    <div class="price">Rp 2.600</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="about-us-section">
-        <div class="about-content">
-            <div class="about-text">
-                <h3>Tentang KlikVa Fashion</h3>
-                <p>Kami percaya bahwa berbelanja seharusnya cepat, mudah, dan menyenangkan. Itulah mengapa Klikva hadir dengan semangat teknologi dan kebudayaan Jawa (Java) untuk membawa pengalaman belanja online terbaik bagi Anda.</p>
-                <p>KlikVa tidak hanya sekadar toko online, tapi juga bagian dari perjalanan gaya hidup Anda. Kami terus berinovasi dengan mengikuti tren terkini dan mendengarkan masukan dari pelanggan setia kami.</p>
-                <p>Ayo mulai jelajahi koleksi kami dan temukan gaya terbaikmu hari ini!</p>
-                <p>Keunggulan kami:</p>
+    <!-- History Section -->
+    <section class="history">
+        <div class="history-container">
+            <div class="history-img">
+                <img src="https://www.indomie.com/uploads/webpage/indomie-history_110316167.png" alt="Indomie History">
+            </div>
+            <div class="history-content">
+                <h2>SEJARAH INDOMIE</h2>
+                <p>Indomie pertama kali diluncurkan pada tahun 1970 oleh PT Sanmaru Food Manufacturing Co. Ltd. yang kemudian menjadi PT Indofood Sukses Makmur Tbk. Produk ini menjadi pionir mi instan di Indonesia dan cepat mendapatkan popularitas karena rasanya yang khas dan harga yang terjangkau.</p>
+                <p>Pada tahun 1982, Indomie mulai diekspor ke berbagai negara dan kini telah menjadi salah satu merek mi instan terbesar di dunia dengan distribusi di lebih dari 90 negara. Inovasi terus dilakukan dengan meluncurkan berbagai varian rasa yang disesuaikan dengan selera konsumen di berbagai negara.</p>
+                <p>Hingga saat ini, Indomie tetap mempertahankan kualitas dan cita rasa yang konsisten, menjadikannya sebagai mi instan favorit keluarga Indonesia selama lebih dari 50 tahun.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <img src="https://www.indomie.com/uploads/slider/image-2_021732830.png" alt="Indomie Footer Image" class="footer-image">
+            </div>
+            <div class="footer-column">
+                <h3>INDOMIE</h3>
+                <p>Perusahaan mi instan terbesar di Indonesia yang telah memproduksi mi instan dengan kualitas terbaik sejak 1970.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/IndomieOfficial"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/indomie"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/Indomielovers?t=fu2B7ZS2X1q1NmMHNN27Ow&s=09"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/@Indomie"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>PRODUCTS</h3>
                 <ul>
-                    <li>Desain eksklusif dan trendy</li>
-                    <li>Bahan berkualitas tinggi</li>
-                    <li>Harga kompetitif</li>
-                    <li>Pengiriman cepat ke seluruh Indonesia</li>
+                    <li><a href="#">Mi Goreng</a></li>
+                    <li><a href="#">Rasa Kuah</a></li>
+                    <li><a href="#">Special Variant</a></li>
+                    <li><a href="#">Limited Edition</a></li>
                 </ul>
             </div>
-            <div class="slideshow-container">
-                <div class="mySlides fade">
-                    <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/6/14/ecb52a5f-0da9-43f1-9d2f-75e502b63498.jpg.webp?ect=4g" alt="Produk KlikVa 1">
-                </div>
-                <div class="mySlides fade">
-                    <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2023/7/18/65476342-53ed-4271-ae54-5dc4bdd04f24.jpg.webp?ect=4g" alt="Produk KlikVa 2">
-                </div>
-                <div class="mySlides fade">
-                    <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/8/15/4fc1e823-05a8-483e-90c4-0c610e7153ac.jpg.webp?ect=4g" alt="Produk KlikVa 3">
-                </div>
+            <div class="footer-column">
+                <h3>RECIPES</h3>
+                <ul>
+                    <li><a href="#">Resep Mi Goreng</a></li>
+                    <li><a href="#">Resep Mi Kuah</a></li>
+                    <li><a href="#">Kreasi Indomie</a></li>
+                    <li><a href="#">Resep Spesial</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>CONTACT US</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Jl. Jend. Sudirman Kav. 76-78, Jakarta</li>
+                    <li><i class="fas fa-phone"></i> (021) 1234567</li>
+                    <li><i class="fas fa-envelope"></i> info@indomie.com</li>
+                </ul>
             </div>
         </div>
-    </section>
-
-    <footer>
-        <div class="footer-logo">KLIKVA</div>
-        <p>Destinasi belanja online terbaik untuk fashion yang stylish, nyaman, dan terjangkau</p>
-        <div class="social-links">
-            <a href="https://www.instagram.com/auiu_56/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.tiktok.com/@brillianwicaksono0" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+        <div class="copyright">
+            <p>© 2025 PT Indofood Sukses Makmur Tbk. All Rights Reserved.</p>
         </div>
-        <p>© 2025 KLIKVA Fashion. All Rights Reserved.</p>
-        <div class="hashtags">#KLIKVAFASHION #STYLEWITHCONFIDENCE</div>
     </footer>
 
-    <a href="#" id="backToTop" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-
-    <div class="ai-chat-btn" id="aiChatBtn">
-        <i class="fas fa-robot"></i>
+    <!-- Chatbot -->
+    <div class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-comment"></i>
     </div>
-    <div class="ai-chat-modal" id="aiChatModal">
-        <div class="ai-chat-header">
-            <h3>KlikVa Fashion Assistant</h3>
-            <span class="ai-chat-close" id="aiChatClose">×</span>
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h3>Domie - Indomie Recipe Expert</h3>
+            <button class="chatbot-close" id="chatbotClose"><i class="fas fa-times"></i></button>
         </div>
-        <div class="ai-chat-body" id="aiChatBody">
-            <div class="ai-chat-message bot">
-                Halo! Cari outfit apa? Coba ketik "casual", "formal", "pesta", atau pilih di bawah: 
-                <div class="quick-reply">
-                    <button onclick="quickReply('Casual')">Casual</button>
-                    <button onclick="quickReply('Formal')">Formal</button>
-                    <button onclick="quickReply('Pesta')">Pesta</button>
-                    <button onclick="quickReply('Aksesoris')">Aksesoris</button>
-                    <button onclick="quickReply('Contact')">Hubungi Kami</button>
-                </div>
+        <div class="chatbot-body" id="chatbotBody">
+            <div class="chatbot-message bot">
+                Halo! Saya Domie, ahli resep Indomie. Apa resep Indomie yang kamu ingin coba hari ini? Ketik misalnya "resep mi goreng pedas" atau "resep kreatif".
             </div>
         </div>
-        <div class="ai-chat-input">
-            <input type="text" id="aiChatInput" placeholder="Ketik gaya yang kamu mau...">
-            <button id="aiChatSend">Kirim</button>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Ketik pertanyaan tentang resep...">
+            <button onclick="sendMessage()">Kirim</button>
         </div>
     </div>
 
     <script>
-        // Cart functionality
-        function updateCartCount() {
-            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            const count = cartItems.reduce((total, item) => total + item.quantity, 0);
-            document.getElementById('cart-count').textContent = count;
+        // Chatbot functionality
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatbotBody = document.getElementById('chatbotBody');
+        const chatbotInput = document.getElementById('chatbotInput');
+
+        chatbotToggle.addEventListener('click', () => {
+            chatbotContainer.classList.toggle('active');
+            chatbotToggle.style.display = chatbotContainer.classList.contains('active') ? 'none' : 'flex';
+        });
+
+        chatbotClose.addEventListener('click', () => {
+            chatbotContainer.classList.remove('active');
+            chatbotToggle.style.display = 'flex';
+        });
+
+        function sendMessage() {
+            const userInput = chatbotInput.value.trim();
+            if (!userInput) return;
+
+            // Display user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'chatbot-message user';
+            userMessage.textContent = userInput;
+            chatbotBody.appendChild(userMessage);
+
+            // Generate bot response
+            const botMessage = document.createElement('div');
+            botMessage.className = 'chatbot-message bot';
+            botMessage.innerHTML = getBotResponse(userInput.toLowerCase());
+            chatbotBody.appendChild(botMessage);
+
+            // Clear input and scroll to bottom
+            chatbotInput.value = '';
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
         }
 
-        // Slideshow
-        let slideIndex = 0;
-
-        function showSlides() {
-            let slides = document.getElementsByClassName("mySlides");
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-                slides[i].classList.remove("active");
+        function getBotResponse(input) {
+            if (input.includes('mi goreng pedas')) {
+                return `
+                    <strong>Resep Indomie Mi Goreng Pedas</strong><br>
+                    <b>Bahan:</b><br>
+                    - 1 bungkus Indomie Mi Goreng Hot & Spicy<br>
+                    - 1 butir telur<br>
+                    - 2 sdm cabai rawit iris<br>
+                    - 1 sdm saus sambal<br>
+                    - Sayuran (kol, wortel) secukupnya<br>
+                    <b>Cara Membuat:</b><br>
+                    1. Rebus mi hingga al dente, tiriskan.<br>
+                    2. Tumis telur orak-arik, masukkan sayuran dan cabai.<br>
+                    3. Masukkan mi dan bumbu Indomie, aduk rata.<br>
+                    4. Tambahkan saus sambal, sajikan panas!<br>
+                    Nikmati pedasnya yang nendang!
+                `;
+            } else if (input.includes('kreatif') || input.includes('unik')) {
+                return `
+                    <strong>Resep Indomie Pizza</strong><br>
+                    <b>Bahan:</b><br>
+                    - 2 bungkus Indomie Mi Goreng<br>
+                    - 1 butir telur<br>
+                    - 50 gr keju mozzarella<br>
+                    - Sosis, paprika, dan jamur secukupnya<br>
+                    <b>Cara Membuat:</b><br>
+                    1. Rebus mi, tiriskan, campur dengan bumbu dan telur.<br>
+                    2. Panaskan wajan, ratakan mi sebagai dasar pizza.<br>
+                    3. Tambahkan topping sosis, paprika, jamur, dan keju.<br>
+                    4. Panggang hingga keju meleleh, sajikan selagi hangat!<br>
+                    Keren, kan? Coba variasi topping favoritmu!
+                `;
+            } else if (input.includes('kuah')) {
+                return `
+                    <strong>Resep Indomie Kuah Telur Creamy</strong><br>
+                    <b>Bahan:</b><br>
+                    - 1 bungkus Indomie Rasa Soto<br>
+                    - 1 butir telur<br>
+                    - 50 ml susu cair<br>
+                    - Daun bawang dan seledri secukupnya<br>
+                    <b>Cara Membuat:</b><br>
+                    1. Rebus mi dalam 400 ml air, masukkan bumbu.<br>
+                    2. Kocok telur dengan susu, tuang ke kuah, aduk perlahan.<br>
+                    3. Tambahkan daun bawang dan seledri.<br>
+                    4. Sajikan hangat dengan taburan bawang goreng!<br>
+                    Rasanya creamy dan bikin nagih!
+                `;
+            } else {
+                return `
+                    Maaf, saya belum paham resep yang kamu maksud. Coba tanyakan resep spesifik seperti "resep mi goreng pedas" atau "resep kuah". Atau minta ide kreatif untuk masak Indomie!
+                `;
             }
-            slideIndex++;
-            if (slideIndex > slides.length) { slideIndex = 1 }
-            slides[slideIndex-1].style.display = "block";
-            slides[slideIndex-1].classList.add("active");
-            setTimeout(showSlides, 3000);
         }
 
-        // Back to Top and Other Interactivity
-        document.addEventListener('DOMContentLoaded', function() {
-            showSlides();
-            updateCartCount();
-
-            const backToTopButton = document.getElementById('backToTop');
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.classList.add('active');
-                } else {
-                    backToTopButton.classList.remove('active');
-                }
-            });
-
-            backToTopButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // AI Chatbot Functionality
-            const aiChatBtn = document.getElementById('aiChatBtn');
-            const aiChatModal = document.getElementById('aiChatModal');
-            const aiChatClose = document.getElementById('aiChatClose');
-            const aiChatInput = document.getElementById('aiChatInput');
-            const aiChatSend = document.getElementById('aiChatSend');
-            const aiChatBody = document.getElementById('aiChatBody');
-
-            aiChatBtn.addEventListener('click', () => {
-                aiChatModal.style.display = aiChatModal.style.display === 'block' ? 'none' : 'block';
-            });
-
-            aiChatClose.addEventListener('click', () => {
-                aiChatModal.style.display = 'none';
-            });
-
-            function addMessage(text, type, quickReplies = []) {
-                const message = document.createElement('div');
-                message.className = `ai-chat-message ${type}`;
-                message.innerHTML = text;
-                if (quickReplies.length > 0) {
-                    const replyDiv = document.createElement('div');
-                    replyDiv.className = 'quick-reply';
-                    quickReplies.forEach(reply => {
-                        const button = document.createElement('button');
-                        button.textContent = reply.label;
-                        button.onclick = () => quickReply(reply.value);
-                        replyDiv.appendChild(button);
-                    });
-                    message.appendChild(replyDiv);
-                }
-                aiChatBody.appendChild(message);
-                aiChatBody.scrollTop = aiChatBody.scrollHeight;
+        // Allow sending message with Enter key
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
             }
-
-            function showTypingIndicator() {
-                addMessage('Sedang mengetik...', 'typing');
-                setTimeout(() => {
-                    const typingMessage = aiChatBody.querySelector('.typing');
-                    if (typingMessage) typingMessage.remove();
-                }, 800);
-            }
-
-            window.quickReply = function(value) {
-                addMessage(value, 'user');
-                processInput(value);
-            };
-
-            function getRecommendation(input) {
-                input = input.toLowerCase();
-                const quickReplies = [
-                    { label: 'Casual', value: 'Casual' },
-                    { label: 'Formal', value: 'Formal' },
-                    { label: 'Pesta', value: 'Pesta' },
-                    { label: 'Aksesoris', value: 'Aksesoris' },
-                    { label: 'Hubungi Kami', value: 'Contact' }
-                ];
-
-                if (input.includes('casual') || input.includes('santai') || input.includes('hari') || input.includes('keren')) {
-                    return {
-                        text: "Gaya casual? Coba <strong>Faith Industries Graffity Hopper Hoodie</strong> (Rp 399.000), nyaman untuk sehari-hari. Lihat di <a href='item.html'>ITEM</a>! Butuh bantuan lain? Hubungi kami di <a href='tel:085335627469'>085335627469</a>. Mau coba gaya lain?",
-                        quickReplies
-                    };
-                } else if (input.includes('formal') || input.includes('kantor') || input.includes('resmi')) {
-                    return {
-                        text: "Untuk formal, saya sarankan <strong>Faith Industries Harrington Jacket</strong> (Rp 1.300.000), elegan dan profesional. Cek di <a href='item.html'>ITEM</a>! Butuh bantuan lain? Hubungi kami di <a href='tel:085335627469'>085335627469</a>. Ingin gaya lain?",
-                        quickReplies
-                    };
-                } else if (input.includes('pesta') || input.includes('party')) {
-                    return {
-                        text: "Pesta? <strong>Faith Industries Racing Series Leather Jacket</strong> (Rp 1.299.000) bikin kamu standout. Lihat di <a href='item.html'>ITEM</a>! Butuh bantuan lain? Hubungi kami di <a href='tel:085335627469'>085335627469</a>. Coba gaya lain?",
-                        quickReplies
-                    };
-                } else if (input.includes('aksesoris') || input.includes('accessories')) {
-                    return {
-                        text: "Lengkapi gaya dengan <strong>FTH Umbrella</strong> (Rp 199.000), payung stylish dan praktis. Cek di <a href='item.html'>ITEM</a>! Butuh bantuan lain? Hubungi kami di <a href='tel:085335627469'>085335627469</a>. Mau lihat gaya lain?",
-                        quickReplies
-                    };
-                } else if (input.includes('jaket') || input.includes('jacket')) {
-                    return {
-                        text: "Jaket keren? <strong>Faith Industries Harrington Jacket</strong> (Rp 1.300.000) cocok untuk berbagai acara. Lihat di <a href='item.html'>ITEM</a>! Butuh bantuan lain? Hubungi kami di <a href='tel:085335627469'>085335627469</a>. Ingin gaya lain?",
-                        quickReplies
-                    };
-                } else if (input.includes('harga') || input.includes('murah') || input.includes('budget')) {
-                    return {
-                        text: "Cari yang terjangkau? <strong>FTH Umbrella</strong> (Rp 199.000) stylish dan ramah di kantong. Cek di <a href='item.html'>ITEM</a>! Butuh bantuan lain? Hubungi kami di <a href='tel:085335627469'>085335627469</a>. Mau gaya lain?",
-                        quickReplies
-                    };
-                } else if (input.includes('contact') || input.includes('hubungi') || input.includes('kontak')) {
-                    return {
-                        text: "Ingin menghubungi kami? Silakan telepon di <a href='tel:085335627469'>085335627469</a> untuk bantuan lebih lanjut. Atau, cari gaya lain di bawah ini:",
-                        quickReplies
-                    };
-                } else {
-                    return {
-                        text: "Hmm, coba ketik 'casual', 'formal', 'pesta', atau 'aksesoris'. Untuk bantuan lebih lanjut, hubungi kami di <a href='tel:085335627469'>085335627469</a>. Atau pilih di bawah:",
-                        quickReplies
-                    };
-                }
-            }
-
-            function processInput(input) {
-                showTypingIndicator();
-                const response = getRecommendation(input);
-                setTimeout(() => {
-                    addMessage(response.text, 'bot', response.quickReplies);
-                }, 800);
-            }
-
-            aiChatSend.addEventListener('click', () => {
-                const userInput = aiChatInput.value.trim();
-                if (userInput) {
-                    addMessage(userInput, 'user');
-                    processInput(userInput);
-                    aiChatInput.value = '';
-                }
-            });
-
-            aiChatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    aiChatSend.click();
-                }
-            });
         });
     </script>
 </body>
